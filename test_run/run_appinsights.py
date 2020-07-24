@@ -1,0 +1,23 @@
+# coding=utf-8
+
+import unittest
+import time
+from BeautifulReport import BeautifulReport
+from utils.base_mail_smtp import Email
+from utils.base_csv import *
+
+base_dir = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+test_cases_path = os.path.join(base_dir, 'test_case')
+report_path = os.path.join(base_dir, 'report')
+
+test_suite1 = unittest.TestLoader().discover(test_cases_path, pattern='appinsights.py')
+
+suite = unittest.TestSuite(test_suite1)
+result = BeautifulReport(suite)
+report_file = "autotest_report_" + time.strftime('%Y%m%d%H%M%S') + ".html"
+
+result.report(filename=report_file,
+              description='Ui Automation Report', log_path=report_path)
+
+report = os.path.join(report_path, report_file)
+# Email(receiver='', path=report).send()
