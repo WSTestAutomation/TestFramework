@@ -10,7 +10,7 @@ base_dir = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 test_cases_path = os.path.join(base_dir, 'test_case')
 report_path = os.path.join(base_dir, 'report')
 
-test_suite1 = unittest.TestLoader().discover(test_cases_path, pattern='appinsights.py')
+test_suite1 = unittest.TestLoader().discover(test_cases_path, pattern='interface_test.py')
 
 suite = unittest.TestSuite(test_suite1)
 result = BeautifulReport(suite)
