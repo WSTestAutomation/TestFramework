@@ -1,3 +1,3 @@
 #!/bin/bash
 
-git pull
+echo "sh y"
