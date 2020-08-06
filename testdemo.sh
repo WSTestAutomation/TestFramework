@@ -1,4 +1,4 @@
 #!/bin/bash
 
 echo "sh"
-echo "test1"
+echo "test2"
