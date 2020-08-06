@@ -1,3 +1,3 @@
 #!/bin/bash
 
-echo "sh y"
+echo "sh"
