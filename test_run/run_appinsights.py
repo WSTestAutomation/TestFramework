@@ -2,8 +2,8 @@
 
 import sys
 import os
+sys.path.append(os.path.dirname(os.getcwd())+os.path.sep+".")
 sys.path.append(os.getcwd())
-
 import unittest
 import time
 from BeautifulReport import BeautifulReport
