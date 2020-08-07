@@ -1,8 +1,8 @@
 # coding=utf-8
 
 import unittest
-from utils.base_csv import *
-from utils.base_yaml import *
+from utilstest.base_csv import *
+from utilstest.base_yaml import *
 
 
 def input_parameter(data):

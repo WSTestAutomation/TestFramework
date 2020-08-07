@@ -1,6 +1,6 @@
 # coding=utf-8
 
-from utils.read_yaml import YamlReader
+from utilstest.read_yaml import YamlReader
 import paramiko
 import os
 '''连接SSH，调用jenkins执行APP业务 调用完后面添加等待时间'''

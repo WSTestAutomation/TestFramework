@@ -1,10 +1,14 @@
 # coding=utf-8
 
+import sys
+import os
+sys.path.append(os.getcwd())
+
 import unittest
 import time
 from BeautifulReport import BeautifulReport
-from utils.base_mail_smtp import Email
-from utils.base_csv import *
+from utilstest.base_mail_smtp import Email
+from utilstest.base_csv import *
 
 base_dir = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 test_cases_path = os.path.join(base_dir, 'test_case')

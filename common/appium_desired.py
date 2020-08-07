@@ -7,7 +7,7 @@ import yaml
 from appium import webdriver
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
-from utils.base_device import *
+from utilstest.base_device import *
 
 
 def appium_desired(app_name, port):

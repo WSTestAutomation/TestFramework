@@ -3,11 +3,13 @@
 import time
 import unittest
 import os
+import sys
+sys.path.append(os.getcwd())
 from BeautifulReport.BeautifulReport import BeautifulReport
-from utils.base_runner import BaseWebTestCase
+from utilstest.base_runner import BaseWebTestCase
 from common.interface_request import get_text
 import pandas as pd
-from utils.base_log import Log
+from utilstest.base_log import Log
 logging = Log().get_logger()
 
 class AppInsights(BaseWebTestCase):

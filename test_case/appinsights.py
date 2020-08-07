@@ -6,7 +6,7 @@ from businessview.web.common.login_business import LoginBusiness
 from businessview.web.appinsights_business import AiBusiness
 from BeautifulReport.BeautifulReport import BeautifulReport
 from common.browser_engine import open_browser
-from utils.base_runner import BaseWebTestCase
+from utilstest.base_runner import BaseWebTestCase
 
 
 class AppInsights(BaseWebTestCase):

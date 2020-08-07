@@ -4,7 +4,7 @@ import os
 import sys
 import yaml
 from selenium import webdriver
-from utils.base_log import Log
+from utilstest.base_log import Log
 from selenium.webdriver import DesiredCapabilities
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 logging = Log().get_logger()

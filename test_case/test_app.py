@@ -12,7 +12,7 @@ from businessview.app.common.common_fun import Common
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__)))))
 from BeautifulReport.BeautifulReport import BeautifulReport
-from utils.base_runner import BaseAppTestCase
+from utilstest.base_runner import BaseAppTestCase
 
 
 class TestScenario1(BaseAppTestCase):
