@@ -2,7 +2,7 @@
 
 from baseview.web.base_web import BaseWebPage
 from page.web.login_page import LoginPage as Page
-from utils.base_yaml import Yaml
+from utilstest.base_yaml import Yaml
 
 
 class LoginBusiness(BaseWebPage):

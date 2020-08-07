@@ -10,7 +10,7 @@ import platform
 import subprocess
 import random
 from multiprocessing import Process
-from utils.base_device import get_device_udid
+from utilstest.base_device import get_device_udid
 
 
 class RunServer(threading.Thread):
