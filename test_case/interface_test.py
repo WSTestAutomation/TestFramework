@@ -4,6 +4,7 @@ import time
 import unittest
 import os
 import sys
+sys.path.append(os.path.dirname(os.getcwd())+os.path.sep+".")
 sys.path.append(os.getcwd())
 from BeautifulReport.BeautifulReport import BeautifulReport
 from utilstest.base_runner import BaseWebTestCase
