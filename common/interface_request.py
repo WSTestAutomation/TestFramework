@@ -8,7 +8,7 @@ import yaml
 base_dir = os.path.dirname(os.path.dirname(__file__))
 
 def get_text(env):
-    web_config_path = os.path.join(base_dir, 'config/web_config.yaml')
+    web_config_path = os.path.join(base_dir, 'config/interface_config.yaml')
     with open(web_config_path, 'r', encoding='utf-8') as file:
         data = yaml.load(file.read(), Loader=yaml.FullLoader)
 
