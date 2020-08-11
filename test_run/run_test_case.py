@@ -8,13 +8,12 @@ import unittest
 import time
 from BeautifulReport import BeautifulReport
 from utilstest.base_mail_smtp import Email
-from utilstest.base_csv import *
 
 base_dir = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 test_cases_path = os.path.join(base_dir, 'test_case')
 report_path = os.path.join(base_dir, 'report')
 
-test_suite1 = unittest.TestLoader().discover(test_cases_path, pattern='interface_test.py')
+test_suite1 = unittest.TestLoader().discover(test_cases_path, pattern='test.py')
 
 suite = unittest.TestSuite(test_suite1)
 result = BeautifulReport(suite)

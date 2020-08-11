@@ -14,7 +14,7 @@ from common.browser_engine import open_browser
 from utilstest.base_runner import BaseWebTestCase
 
 
-class AppInsights(BaseWebTestCase):
+class web_test(BaseWebTestCase):
 
     @BeautifulReport.add_test_img('test_new_ai{}'.format(time.strftime('%Y%m%d%H%M%S')))
     def test_new_ai(self):
