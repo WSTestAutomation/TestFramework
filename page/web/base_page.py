@@ -19,6 +19,5 @@ class BasePage:
     delete_button = (By.CSS_SELECTOR, 'li[title="Delete"]')
     blade_title = (By.CSS_SELECTOR, 'div.fxs-blade-title-content')
     progress_dots = (By.CSS_SELECTOR, 'fxs-progress-dots-dot')
-
-
-
+    baidu_input = (By.CSS_SELECTOR, 'input[class="s_ipt"]')
+    baudu_baike = (By.CSS_SELECTOR, 'a[target="_blank"]')

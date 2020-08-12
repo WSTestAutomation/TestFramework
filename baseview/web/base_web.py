@@ -159,8 +159,3 @@ class BaseWebPage(object):
 
     def scroll_into_view(self, element):
         self.driver.execute_script("arguments[0].scrollIntoView();", element)
-
-
-
-
-

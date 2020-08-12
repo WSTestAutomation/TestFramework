@@ -3,6 +3,7 @@
 from baseview.web.base_web import BaseWebPage
 from page.web.login_page import LoginPage as Page
 from utilstest.base_yaml import Yaml
+import time
 
 
 class LoginBusiness(BaseWebPage):
@@ -24,6 +25,11 @@ class LoginBusiness(BaseWebPage):
         self.find_element_click(self._page.click_verify_button, 'Sign in with your phone or token device')
         self.click(self._page.yes_button)
 
+    def demo(self):
+        self.send_keys(self._page.baidu_input, "selenium", need_enter=True)
+        time.sleep(5)
+        self.find_element_click(self._page.baudu_baike, "库的基本使用 - 简书")
+        time.sleep(10)
 
 
 
