@@ -93,12 +93,12 @@ class BaseAppPage(object):
 
         if start_time > end_time:
             times = int(start_time) - int(end_time)
-            for i in range(times):
+            for _ in range(times):
                 self.drag_from_to_duration(element_x, element_y, element_x, end_y, 0.5)
 
         elif start_time < end_time:
             times = int(end_time) - int(start_time)
-            for i in range(times):
+            for _ in range(times):
                 self.drag_from_to_duration(element_x, end_y, element_x, element_y, 0.3)
 
     def drag_from_to_duration(self, start_x, start_y, end_x, end_y, duration=None):
