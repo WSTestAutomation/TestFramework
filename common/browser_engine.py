@@ -20,7 +20,9 @@ elif sys.platform.__eq__('darwin'):
 def open_browser(env, browser='chrome'):
     driver = None
     if browser == "chrome":
-        driver = webdriver.Chrome(executable_path=chrome_driver_path)
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.add_argument('--incognito')
+        driver = webdriver.Chrome(executable_path=chrome_driver_path, chrome_options=chrome_options)
     elif browser == "ie":
         driver = webdriver.Ie(executable_path=ie_driver_path)
         # selenium grid
@@ -37,7 +39,7 @@ def open_browser(env, browser='chrome'):
     elif env == '':
         driver = None
     driver.maximize_window()
-    driver.implicitly_wait(5)
+    driver.implicitly_wait(30)
     return driver
 
 
