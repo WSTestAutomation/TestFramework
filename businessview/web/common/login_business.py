@@ -4,6 +4,7 @@ from baseview.web.base_web import BaseWebPage
 from page.web.login_page import LoginPage as Page
 from utilstest.base_yaml import Yaml
 import time
+import pyautogui
 
 
 class LoginBusiness(BaseWebPage):
@@ -19,17 +20,18 @@ class LoginBusiness(BaseWebPage):
     def login(self, user_name=username, password=password):
         self.send_keys(self._page.user_name_input, user_name)
         self.click(self._page.next_button)
-        self.find_element_click(self._page.click_signin_button, 'Sign in with a username and password instead')
-        self.send_keys(self._page.password_input, password)
-        self.find_element_click(self._page.sign_button, 'Sign in')
-        self.find_element_click(self._page.click_verify_button, 'Sign in with your phone or token device')
-        self.click(self._page.yes_button)
-
-    def demo(self):
-        self.send_keys(self._page.baidu_input, "selenium", need_enter=True)
         time.sleep(5)
-        self.find_element_click(self._page.baudu_baike, "库的基本使用 - 简书")
-        time.sleep(10)
+        pyautogui.typewrite(message=user_name)
+        pyautogui.press('tab')
+        pyautogui.typewrite(message=password)
+        pyautogui.press('Enter')
+        self.click(self._page.click_verify_button)
+        getTotal = self.find_element_by_xpath(self._page.check_login_result)
+        try:
+            assert getTotal.text == "Learn how to use Microsoft Stream"
+            print ('Login Success')
+        except Exception as e:
+            print ('Assertion test fail.', format(e))
 
 
 

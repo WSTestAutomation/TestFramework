@@ -12,22 +12,19 @@ from businessview.web.appinsights_business import AiBusiness
 from BeautifulReport.BeautifulReport import BeautifulReport
 from common.browser_engine import open_browser
 from utilstest.base_runner import BaseWebTestCase
-from baseview.web.base_web import BaseWebPage
-from page.web.login_page import LoginPage as Page
-from utilstest.base_yaml import Yaml
-
+from selenium import webdriver
 
 class web_test(BaseWebTestCase):
 
     @BeautifulReport.add_test_img('test_new_ai{}'.format(time.strftime('%Y%m%d%H%M%S')))
     def test_new_ai(self):
         """Create AI Automation Demo"""
-        print("test")
+        print("Login")
         self.driver = open_browser('url')
+        self.driver.implicitly_wait(30)
         _loginBusiness = LoginBusiness(driver=self.driver)
-        _loginBusiness.demo()
-        # _loginBusiness.login()
-        print("Test Success")
+        _loginBusiness.login()
+        print("Test End")
         
 
 if __name__ == '__main__':
