@@ -15,6 +15,6 @@ Those tools are best installed using pip, Python's module installer. The Python 
 `pip install -r requirements.txt`
 
 ## Example
-Modify /config/web_config.yaml
+Modify /config/web_config.yaml  
 Switch to English input method  
 Execute /test_run/run_test_case.py
