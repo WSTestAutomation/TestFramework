@@ -5,6 +5,7 @@ from page.web.login_page import LoginPage as Page
 from utilstest.base_yaml import Yaml
 import time
 import pyautogui
+import logging
 
 
 class LoginBusiness(BaseWebPage):
@@ -28,10 +29,10 @@ class LoginBusiness(BaseWebPage):
         self.click(self._page.click_verify_button)
         getTotal = self.find_element_by_xpath(self._page.check_login_result)
         try:
-            assert getTotal.text == "Learn how to use Microsoft Stream"
-            print ('Login Success')
+            assert getTotal.get_attribute("textContent") == user_name
+            logging.info('login success.')
         except Exception as e:
-            print ('Assertion test fail.', format(e))
+            logging.info('Assertion test fail.')
 
 
 
