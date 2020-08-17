@@ -18,5 +18,5 @@ class BasePage:
     delete_button = (By.CSS_SELECTOR, 'li[title="Delete"]')
     blade_title = (By.CSS_SELECTOR, 'div.fxs-blade-title-content')
     progress_dots = (By.CSS_SELECTOR, 'fxs-progress-dots-dot')
-    check_login_result = ("//h2[@class='c-heading-3 home-section-item-title ng-binding']")
     click_verify_button = (By.ID, 'WindowsAzureMultiFactorAuthentication')
+    check_login_result = ('//div[@id="mectrl_currentAccount_secondary"]')

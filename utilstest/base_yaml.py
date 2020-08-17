@@ -9,7 +9,6 @@ class Yaml:
     base_dir = os.path.dirname(os.path.dirname(__file__))
     input_data_path = os.path.join(base_dir, 'config/input_parameter.yaml')
     web_config_path = os.path.join(base_dir, 'config/web_config.yaml')
-    fwd_caps_path = os.path.join(base_dir, 'config/fwd_caps.yaml')
 
     def __init__(self, file_path):
         if os.path.exists(file_path):
