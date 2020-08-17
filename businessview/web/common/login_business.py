@@ -20,20 +20,3 @@ class LoginBusiness(BaseWebPage):
 
     def login(self, user_name=username, password=password):
         self.send_keys(self._page.user_name_input, user_name)
-        self.click(self._page.next_button)
-        time.sleep(5)
-        pyautogui.typewrite(message=user_name)
-        pyautogui.press('tab')
-        pyautogui.typewrite(message=password)
-        pyautogui.press('Enter')
-        self.click(self._page.click_verify_button)
-        getTotal = self.find_element_by_xpath(self._page.check_login_result)
-        try:
-            assert getTotal.get_attribute("textContent") == user_name
-            logging.info('login success.')
-        except Exception as e:
-            logging.info('Assertion test fail.')
-
-
-
-
