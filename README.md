@@ -1,12 +1,12 @@
-# OMG_Automation
-Web App & Interface Automation
+# What is this project?
+This is a template for creating new test automation framework on Web & App.
 
-## Building
-Install [git](https://git-scm.com/downloads) version control tool   
-Install chrome browser   
-Install [VS Code](https://code.visualstudio.com/download) and install python plugin   
-Download the Python installer [here](https://www.python.org/downloads/).            
-Install Python. Don't forget to check the "Add Python to PATH" box.   
+## Dependencies
+Install chrome browser
+Install [VS Code](https://code.visualstudio.com/download)
+Install [git](https://git-scm.com/downloads) version control tool
+Download the Python installer [here](https://www.python.org/downloads/) and then install Python. Don't forget to check the "Add Python to PATH" box.
+Install python plugin in VScode.
 
 ## Install module
 You need to install the module defined in requirements.txt.  
