@@ -15,7 +15,7 @@ def appium_desired(app_name, port):
 
     fwd_caps_path = os.path.join(base_dir, 'config/appium_caps.yaml')
     with open(fwd_caps_path, 'r', encoding='utf-8') as file:
-        data = yaml.load(file)
+        data = yaml.load(file, Loader=yaml.FullLoader)
 
     if app_name == "app_path":
         app = data["app_path"]
