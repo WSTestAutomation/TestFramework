@@ -32,7 +32,7 @@ def open_browser(env, browser='chrome'):
     # 获取web配置文件
     web_config_path = os.path.join(base_dir, 'config/web_config.yaml')
     with open(web_config_path, 'r', encoding='utf-8') as file:
-        data = yaml.load(file)
+        data = yaml.load(file, Loader=yaml.FullLoader)
     if env == "url":
         logging.info("Open Url: %s" % data["url"])
         driver.get(data["url"])
