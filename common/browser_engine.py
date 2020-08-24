@@ -7,7 +7,7 @@ from selenium import webdriver
 from utilstest.base_log import Log
 from selenium.webdriver import DesiredCapabilities
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
-logging = Log().get_logger()
+Logger = Log().get_logger()
 
 base_dir = os.path.dirname(os.path.dirname(__file__))
 if sys.platform.__eq__('win32'):
@@ -17,7 +17,7 @@ elif sys.platform.__eq__('darwin'):
     chrome_driver_path = os.path.join(base_dir, 'drivers', 'chromedriver')
 
 
-def open_browser(env, browser='chrome'):
+def open_browser(env, browser='chrome'):    
     driver = None
     if browser == "chrome":
         chrome_options = webdriver.ChromeOptions()
@@ -35,23 +35,23 @@ def open_browser(env, browser='chrome'):
         data = yaml.load(file, Loader=yaml.FullLoader)
     if env == "msit":
         url = data["portal"]['msit']
-        logging.info("Open Url: %s" % url)
+        Logger.info("Open Url: %s" % url)
         driver.get(url)
     if env == "srol1":
         url = data["portal"]['srol1']
-        logging.info("Open Url: %s" % url)
+        Logger.info("Open Url: %s" % url)
         driver.get(url)
     if env == "srol2":
         url = data["portal"]['srol2']
-        logging.info("Open Url: %s" % url)
+        Logger.info("Open Url: %s" % url)
         driver.get(url)
     if env == "ppe":
         url = data["portal"]['ppe']
-        logging.info("Open Url: %s" % url)
+        Logger.info("Open Url: %s" % url)
         driver.get(url)
     if env == "refe":
         url = data["portal"]['refe']
-        logging.info("Open Url: %s" % url)
+        Logger.info("Open Url: %s" % url)
         driver.get(url)
     elif env == '':
         driver = None

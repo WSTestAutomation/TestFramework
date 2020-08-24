@@ -5,7 +5,7 @@ from page.web.login_page import LoginPage as Page
 from utilstest.base_yaml import Yaml
 import time
 import pyautogui
-from utilstest.base_log import Log
+from common.browser_engine import Logger
 
 
 class LoginBusiness(BaseWebPage):
@@ -17,7 +17,6 @@ class LoginBusiness(BaseWebPage):
     def __init__(self, driver):
         BaseWebPage.__init__(self=self, driver=driver)
         self._page = Page()
-        self.logging = Log().get_logger()
 
     def login(self, user_name=username, password=password):
         if  not self.driver.title.startswith('Sign in to your account'):
@@ -34,8 +33,8 @@ class LoginBusiness(BaseWebPage):
 
             # Now it should be in Homepage!
             if user_name in self.driver.page_source:
-                self.logging.info('%s is signed in.', user_name)
+                Logger.info('%s is signed in.', user_name)
             else:
-                self.logging.error('Sign in failed')
+                Logger.error('Sign in failed')
         except Exception as e:
-            self.logging.critical('Exception: %s', format(e))
+            Logger.critical('Exception: %s', format(e))

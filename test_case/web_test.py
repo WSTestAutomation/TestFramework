@@ -12,6 +12,7 @@ from BeautifulReport.BeautifulReport import BeautifulReport
 from common.browser_engine import open_browser
 from utilstest.base_runner import BaseWebTestCase
 from utilstest.base_yaml import Yaml
+from common.browser_engine import Logger
 
 
 class web_test(BaseWebTestCase):
@@ -21,9 +22,9 @@ class web_test(BaseWebTestCase):
         self.env = self.data['env']
 
     @BeautifulReport.add_test_img('web_test_login_{}'.format(time.strftime('%Y%m%d%H%M%S')))
-    def test_login(self):
-
-        self.logger.info("Login to", self.env)
+    def test_login(self):        
+        Logger.info("Test Start:")
+        Logger.info("Login to %s", self.env)
         self.driver = open_browser(self.env,'chrome')
         _loginBusiness = LoginBusiness(driver=self.driver)
 
@@ -36,7 +37,7 @@ class web_test(BaseWebTestCase):
         # PPE is much slower and need to wait for more seconds.
         _loginBusiness.login('Your Account', 'Your Password')
 
-        self.logger.info("Test End")
+        Logger.info("Test End")
         
 if __name__ == '__main__':
     unittest.main()

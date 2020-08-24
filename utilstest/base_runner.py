@@ -10,7 +10,6 @@ base_dir = os.path.dirname(os.path.dirname(__file__))
 
 
 class BaseAppTestCase(unittest.TestCase):
-    logger = Log().get_logger()
 
     @classmethod
     def setUpClass(cls, env):
@@ -43,7 +42,6 @@ class BaseAppTestCase(unittest.TestCase):
 
 
 class BaseWebTestCase(unittest.TestCase):
-    logger = Log().get_logger()
 
     @classmethod
     def setUpClass(cls):
