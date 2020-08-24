@@ -33,13 +33,30 @@ def open_browser(env, browser='chrome'):
     web_config_path = os.path.join(base_dir, 'config/web_config.yaml')
     with open(web_config_path, 'r', encoding='utf-8') as file:
         data = yaml.load(file, Loader=yaml.FullLoader)
-    if env == "url":
-        logging.info("Open Url: %s" % data["url"])
-        driver.get(data["url"])
+    if env == "msit":
+        url = data["portal"]['msit']
+        logging.info("Open Url: %s" % url)
+        driver.get(url)
+    if env == "srol1":
+        url = data["portal"]['srol1']
+        logging.info("Open Url: %s" % url)
+        driver.get(url)
+    if env == "srol2":
+        url = data["portal"]['srol2']
+        logging.info("Open Url: %s" % url)
+        driver.get(url)
+    if env == "ppe":
+        url = data["portal"]['ppe']
+        logging.info("Open Url: %s" % url)
+        driver.get(url)
+    if env == "refe":
+        url = data["portal"]['refe']
+        logging.info("Open Url: %s" % url)
+        driver.get(url)
     elif env == '':
         driver = None
     driver.maximize_window()
-    driver.implicitly_wait(30)
+    driver.implicitly_wait(data['implicitly_wait'])
     return driver
 
 

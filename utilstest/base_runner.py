@@ -5,11 +5,13 @@ import unittest
 import warnings
 from businessview.app.common.common_fun import Common
 from common.appium_desired import appium_android_desired, appium_desired
-
+from utilstest.base_log import Log
 base_dir = os.path.dirname(os.path.dirname(__file__))
 
 
 class BaseAppTestCase(unittest.TestCase):
+    logger = Log().get_logger()
+
     @classmethod
     def setUpClass(cls, env):
         warnings.simplefilter("ignore", ResourceWarning)
@@ -41,6 +43,8 @@ class BaseAppTestCase(unittest.TestCase):
 
 
 class BaseWebTestCase(unittest.TestCase):
+    logger = Log().get_logger()
+
     @classmethod
     def setUpClass(cls):
         warnings.simplefilter("ignore", ResourceWarning)
