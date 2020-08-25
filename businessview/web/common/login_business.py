@@ -19,11 +19,14 @@ class LoginBusiness(BaseWebPage):
         self._page = Page()
 
     def login(self, user_name=username, password=password):
-        if  not self.driver.title.startswith('Sign in to your account'):
-            raise Exception('Not in the LoginPage.')
+        is_sucess = False 
+        if not self.driver.title.startswith('Sign in to your account'):
+            # If there's a critial failure and we cannot go ahead, use Logger.excetpion()
+            Logger.exception('Not in the LoginPage.')
+
         try:
             self.send_keys(self._page.user_name_input, user_name)
-            self.click(self._page.next_button)
+            self.click(self._page.next_input)
             # TODO: there is a popup window here and possible we need to input credentials in a differet way...
 
             self.send_keys(self._page.password_input, password)
@@ -34,7 +37,10 @@ class LoginBusiness(BaseWebPage):
             # Now it should be in Homepage!
             if user_name in self.driver.page_source:
                 Logger.info('%s is signed in.', user_name)
+                is_sucess = True
             else:
                 Logger.error('Sign in failed')
         except Exception as e:
-            Logger.critical('Exception: %s', format(e))
+            Logger.error('Exception: %s', format(e))
+        finally:
+            return is_sucess
