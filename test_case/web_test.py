@@ -22,12 +22,12 @@ class web_test(BaseWebTestCase):
         self.env = self.data['env']
 
     @BeautifulReport.add_test_img('web_test_login_{}'.format(time.strftime('%Y%m%d%H%M%S')))
-    def test_login(self):        
+    def test_login(self):
+        '''Scenario1: A demo for login'''
         Logger.info("Test Start:")
         Logger.info("Login to %s", self.env)
         self.driver = open_browser(self.env,'chrome')
         _loginBusiness = LoginBusiness(driver=self.driver)
-
 
         # for SROL1 and SROL2, we can use test accounts.
         # You can edit web_config.yaml but please do not commit the file.
