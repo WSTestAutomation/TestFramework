@@ -3,8 +3,6 @@
 from baseview.web.base_web import BaseWebPage
 from page.web.login_page import LoginPage as Page
 from utilstest.base_yaml import Yaml
-import time
-import pyautogui
 from common.browser_engine import Logger
 
 

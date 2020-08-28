@@ -8,6 +8,7 @@ sys.path.append(os.getcwd())
 import time
 import unittest
 from businessview.web.common.login_business import LoginBusiness
+from businessview.web.common.test_search import SearchBusiness
 from BeautifulReport.BeautifulReport import BeautifulReport
 from common.browser_engine import open_browser
 from utilstest.base_runner import BaseWebTestCase
@@ -33,6 +34,11 @@ class web_test(BaseWebTestCase):
         # You can edit web_config.yaml but please do not commit the file.
         res = _loginBusiness.login(self.data['user']['test1'], self.data['pwd']['commonpwd'])
         self.assertTrue(res, 'Able to sign in %s with account %s' %(self.env, self.data['user']['test1']))
+
+        _searchBusiness = SearchBusiness(driver=self.driver)
+        res = _searchBusiness.test_search()
+        self.assertTrue(res, 'Search success')
+
         # For PPE and MSIT, we can use our personal accounts.
         # MSIT may meet some additional steps for security reason which bloacks the test
         # PPE is much slower and need to wait for more seconds.
