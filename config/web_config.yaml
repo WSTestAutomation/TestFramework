@@ -1,3 +1,9 @@
-url: https://ppe.microsoftstream.com
-username: ''
-password: ''
+env: ppe
+portal:
+  msit: https://msit.microsoftstream.com
+  ppe: https://ppe.microsoftstream.com
+user:
+  personal_account: XXX@microsoft.com
+pwd:
+  personal_pwd: XXXX
+implicitly_wait: 120
