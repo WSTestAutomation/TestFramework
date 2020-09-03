@@ -1,3 +1,19 @@
-url: https://ppe.microsoftstream.com
-username: ''
-password: ''
+env: ppe
+portal:
+  msit: https://msit.microsoftstream.com
+  ppe: https://ppe.microsoftstream.com
+  srol1: https://web-srol-1.stream.azure-test.net
+  srol2: https://web-srol-2.stream.azure-test.net
+  refe: https://web-refe-1.stream.azure-test.net
+user:
+  test1: test1@media.ccsctp.net
+  test2: test2@media.ccsctp.net
+  test3: test3@media.ccsctp.net
+  test4: test4@media.ccsctp.net
+  test5: test5@media.ccsctp.net
+  tenantadmin: tenantadmin@media.ccsctp.net
+  streamadmin: streamadmin@media.ccsctp.net
+  personalAccount: XXX@microsoft.com
+pwd:
+  commonpwd: XXXX
+implicitly_wait: 120
