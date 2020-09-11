@@ -1,7 +1,5 @@
 # coding=utf-8
 
-import os
-from selenium.webdriver.chrome.options import Options
 import time
 from baseview.web.base_web import BaseWebPage
 

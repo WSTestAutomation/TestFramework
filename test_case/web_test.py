@@ -8,12 +8,13 @@ sys.path.append(os.getcwd())
 import time
 import unittest
 from businessview.web.common.login_business import LoginBusiness
-from businessview.web.common.test_search import SearchBusiness
+from businessview.web.common.search_business import SearchBusiness
 from BeautifulReport.BeautifulReport import BeautifulReport
 from common.browser_engine import open_browser
 from utilstest.base_runner import BaseWebTestCase
 from utilstest.base_yaml import Yaml
 from common.browser_engine import Logger
+from test_case.seaarch_test import Search_test
 
 
 class web_test(BaseWebTestCase):
@@ -35,9 +36,9 @@ class web_test(BaseWebTestCase):
         res = _loginBusiness.login(self.data['user']['test1'], self.data['pwd']['commonpwd'])
         self.assertTrue(res, 'Able to sign in %s with account %s' %(self.env, self.data['user']['test1']))
 
-        _searchBusiness = SearchBusiness(driver=self.driver)
-        res = _searchBusiness.test_search()
-        self.assertTrue(res, 'Search success')
+        _searchTest = Search_test(driver=self.driver)
+        _searchTest.test_search()
+        # self.assertTrue(res, 'Search success')
 
         # For PPE and MSIT, we can use our personal accounts.
         # MSIT may meet some additional steps for security reason which bloacks the test
@@ -45,7 +46,7 @@ class web_test(BaseWebTestCase):
         #_loginBusiness.login('Your Account', 'Your Password')
 
         Logger.info("Test End")
-        
+
 if __name__ == '__main__':
     unittest.main()
 

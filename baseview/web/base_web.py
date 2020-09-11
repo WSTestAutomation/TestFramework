@@ -20,6 +20,15 @@ class BaseWebPage(object):
     def quit_browser(self):
         self.driver.quit()
 
+    def click_back_button(self):
+        self.driver.back()
+
+    def click_forward_button(self):
+        self.driver.forward()
+
+    def click_refresh_button(self):
+        self.driver.refresh()
+
     def find_element(self, *loc):
         logging.info('通过 %s: %s 查找元素' % (loc[0], loc[1]))
         element = WebDriverWait(self.driver, 30).until(EC.presence_of_element_located(locator=loc))
@@ -43,8 +52,8 @@ class BaseWebPage(object):
 
     def find_elements_by_xpath(self, loc):
         logging.info('通过 Xpath: %s 查找元素' % loc)
-        element = self.driver.find_elements_by_xpath(loc)
-        return element
+        elements = self.driver.find_elements_by_xpath(loc)
+        return elements
 
     def click(self, loc):
         element = self.find_element(*loc)
