@@ -26,14 +26,14 @@ class Search_test(BaseWebPage):
         # change to channels button
         self.click(self._page.click_channels_button)
         getSearchForText = self.find_elements(*self._page.check_search_for_text)
-        for i in getTitleText:
+        for i in getSearchForText:
             assert "Search for channels" in i.text
         _searchBusiness.search_for_videos('测试', "Channels", changeSortMode=False)
 
         # change to People button
         self.click(self._page.click_People_button)
         getSearchForText = self.find_elements(*self._page.check_search_for_text)
-        for i in getTitleText:
+        for i in getSearchForText:
             assert "Search for people" in i.text
         _searchBusiness.search_for_videos('test', "People", changeSortMode=False)
 
