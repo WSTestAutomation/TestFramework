@@ -10,6 +10,7 @@ from selenium.webdriver.support.select import Select
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
+from selenium.common.exceptions import NoSuchElementException
 
 
 class BaseWebPage(object):
@@ -22,12 +23,15 @@ class BaseWebPage(object):
 
     def click_back_button(self):
         self.driver.back()
+        time.sleep(2)
 
     def click_forward_button(self):
         self.driver.forward()
+        time.sleep(2)
 
     def click_refresh_button(self):
         self.driver.refresh()
+        time.sleep(2)
 
     def find_element(self, *loc):
         logging.info('通过 %s: %s 查找元素' % (loc[0], loc[1]))
@@ -49,11 +53,6 @@ class BaseWebPage(object):
         logging.info('通过 Xpath: %s 查找元素' % loc)
         element = self.driver.find_element_by_xpath(loc)
         return element
-
-    def find_elements_by_xpath(self, loc):
-        logging.info('通过 Xpath: %s 查找元素' % loc)
-        elements = self.driver.find_elements_by_xpath(loc)
-        return elements
 
     def click(self, loc):
         element = self.find_element(*loc)
@@ -178,3 +177,11 @@ class BaseWebPage(object):
 
     def scroll_into_view(self, element):
         self.driver.execute_script("arguments[0].scrollIntoView();", element)
+
+    def check_element_if_present(self, loc):
+        try:
+            res = self.find_element(*loc)
+        except Exception as e:
+            logging.info('There are some videos to display')
+            return ""
+        return "True"

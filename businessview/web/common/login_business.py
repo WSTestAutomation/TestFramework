@@ -5,7 +5,6 @@ from page.web.login_page import LoginPage as Page
 from utilstest.base_yaml import Yaml
 from common.browser_engine import Logger
 
-
 class LoginBusiness(BaseWebPage):
 
     data = Yaml(Yaml.web_config_path).read()
