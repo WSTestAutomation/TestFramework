@@ -4,6 +4,7 @@ from baseview.web.base_web import BaseWebPage
 from page.web.search_page import SearchPage as Page
 from utilstest.dynamic_loading import dynamic_loading
 from common.browser_engine import Logger
+import time
 
 class SearchBusiness(BaseWebPage):
 
@@ -12,9 +13,11 @@ class SearchBusiness(BaseWebPage):
         self._page = Page()
     
     def check_currunt_page(self):
+        time.sleep(5)
         pass
 
     def change_sort_mode(self):
+        Logger.info("In change_soet_mode")
         pass
 
     def check_search_result(self, navigationTopBar, Browser):
@@ -24,7 +27,7 @@ class SearchBusiness(BaseWebPage):
             if getSearchResult == "True":
                 return is_sucess
 
-        if (navigationTopBar == "Videos" or navigationTopBar == "channels" or navigationTopBar == "followed") and (Browser == "Discover"or Browser == "My content folloewd"):
+        if (navigationTopBar == "Videos" or navigationTopBar == "Channels" or navigationTopBar == "followed") and (Browser == "Discover"or Browser == "My content folloewd"):
             getSearchResult = self.check_element_if_present(self._page.check_search_result_if_null)
             if getSearchResult == "True":
                 return is_sucess
@@ -39,6 +42,8 @@ class SearchBusiness(BaseWebPage):
 
             if navigationTopBar == "People":
                 getTitleText = self.find_elements(*self._page.check_people_title_text)
+            elif Browser == "My content Channels" and navigationTopBar == "Channels":
+                getTitleText = self.find_elements(*self._page.check_my_content_channels_title_text)
             else:
                 getTitleText = self.find_elements(*self._page.check_title_text)
             
@@ -65,12 +70,15 @@ class SearchBusiness(BaseWebPage):
             _dynamic_loading.scrool_top()
             if changeSortMode == True:
                 self.change_sort_mode()
-            if navigationTopBar == "Videos" or navigationTopBar == "channels" or navigationTopBar == "watchlists":
-                self.clicks(self._page.click_a_video, 0)
-                self.check_currunt_page()
             if navigationTopBar == "People":
-                 self.clicks(self._page.click_a_people, 0)
-                 self.check_currunt_page()
+                self.clicks(self._page.check_people_title_text, 0)
+                self.check_currunt_page()
+            elif Browser == "My content Channels" and navigationTopBar == "Channels":
+                self.clicks(self._page.check_my_content_channels_title_text, 0)
+                self.check_currunt_page()
+            else:
+                self.clicks(self._page.check_title_text, 0)
+                self.check_currunt_page()
         
         self.click_back_button()
         self.check_currunt_page()
