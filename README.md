@@ -1,5 +1,5 @@
 # What is this project?
-This is a template for creating new test automation projects for Web & mobile App.
+This is a test automation project for Stream Web & mobile App.
 
 # Dependencies
 Install chrome browser  
