@@ -1,8 +1,9 @@
 # coding=utf-8
 # @Time    :
 # @Author  :
-# @File    : business_page.py
+# @File    : search_page.py
 
+from page.web.base.base_page import BasePage
 from selenium.webdriver.common.by import By
 
 class SearchPage:
@@ -23,3 +24,4 @@ class SearchPage:
     check_my_content_result_if_null = (By.XPATH, '//div[@class="ng-binding ng-scope"]')
     my_content_my_watchlists = (By.XPATH, '//button[@class="c-action-trigger nav-link nav-link-option-3"]')
     my_content_my_followed = (By.XPATH, '//button[@class="c-action-trigger nav-link nav-link-option-4"]')
+    

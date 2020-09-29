@@ -1,22 +1,22 @@
 # coding=utf-8
 
-from baseview.web.base_web import BaseWebPage
-from page.web.login_page import LoginPage as Page
+from baseview.web.business_web import BusinessWebPage
+from page.web.business.common.login_page import LoginPage as Page
 from utilstest.base_yaml import Yaml
 from common.browser_engine import Logger
 
-class LoginBusiness(BaseWebPage):
+class LoginBusiness(BusinessWebPage):
 
     data = Yaml(Yaml.web_config_path).read()
     username = data['user']['personalAccount']
     password = data['pwd']['commonpwd']
 
     def __init__(self, driver):
-        BaseWebPage.__init__(self=self, driver=driver)
+        BusinessWebPage.__init__(self=self, driver=driver)
         self._page = Page()
 
     def login(self, user_name=username, password=password):
-        is_sucess = False 
+        is_sucess = False
         if not self.driver.title.startswith('Sign in to your account'):
             # If there's a critial failure and we cannot go ahead, use Logger.excetpion()
             Logger.exception('Not in the LoginPage.')

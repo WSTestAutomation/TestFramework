@@ -19,19 +19,20 @@ class BaseWebPage(object):
         self.driver = driver
 
     def quit_browser(self):
+        logging.info('关闭浏览器')
         self.driver.quit()
 
     def click_back_button(self):
+        logging.info('点击浏览器后退按钮')
         self.driver.back()
-        time.sleep(2)
 
     def click_forward_button(self):
+        logging.info('点击浏览器前进按钮')
         self.driver.forward()
-        time.sleep(2)
 
     def click_refresh_button(self):
+        logging.info('点击浏览器刷新按钮')
         self.driver.refresh()
-        time.sleep(2)
 
     def find_element(self, *loc):
         logging.info('通过 %s: %s 查找元素' % (loc[0], loc[1]))
@@ -156,8 +157,8 @@ class BaseWebPage(object):
             ActionChains(self.driver).context_click(element).perform()
 
     # 点击坐标
-    def action_coordinates(self, a, b):
-        ActionChains(self.driver).move_by_offset(a, b).click().perform()
+    def action_coordinates(self, xoffset, yoffset):
+        ActionChains(self.driver).move_by_offset(xoffset, yoffset).click().perform()
 
     def set_attribute(self, element, attribute_name, value):
         self.driver.execute_script("arguments[0].setAttribute(arguments[1],arguments[2])",
@@ -178,10 +179,10 @@ class BaseWebPage(object):
     def scroll_into_view(self, element):
         self.driver.execute_script("arguments[0].scrollIntoView();", element)
 
-    def check_element_if_present(self, loc):
+    def is_element_present(self, loc):
         try:
-            res = self.find_element(*loc)
-        except Exception as e:
-            logging.info('There are some videos to display')
-            return ""
-        return "True"
+            self.driver.find_element(*loc)
+        except NoSuchElementException:
+            logging.info('未找到元素')
+            return False
+        return True
