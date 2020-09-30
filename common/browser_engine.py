@@ -35,23 +35,23 @@ def open_browser(env, browser='chrome'):
         data = yaml.load(file, Loader=yaml.FullLoader)
     if env == "msit":
         url = data["portal"]['msit']
-        Logger.info("Open Url: %s" % url)
+        Logger.info("Open Url: %s", url)
         driver.get(url)
     if env == "srol1":
         url = data["portal"]['srol1']
-        Logger.info("Open Url: %s" % url)
+        Logger.info("Open Url: %s", url)
         driver.get(url)
     if env == "srol2":
         url = data["portal"]['srol2']
-        Logger.info("Open Url: %s" % url)
+        Logger.info("Open Url: %s", url)
         driver.get(url)
     if env == "ppe":
         url = data["portal"]['ppe']
-        Logger.info("Open Url: %s" % url)
+        Logger.info("Open Url: %s", url)
         driver.get(url)
     if env == "refe":
         url = data["portal"]['refe']
-        Logger.info("Open Url: %s" % url)
+        Logger.info("Open Url: %s", url)
         driver.get(url)
     elif env == '':
         driver = None

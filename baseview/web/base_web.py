@@ -35,12 +35,12 @@ class BaseWebPage(object):
         self.driver.refresh()
 
     def find_element(self, *loc):
-        logging.info('通过 %s: %s 查找元素' % (loc[0], loc[1]))
+        logging.info('通过 %s: %s 查找元素', loc[0], loc[1])
         element = WebDriverWait(self.driver, 30).until(EC.presence_of_element_located(locator=loc))
         return element
 
     def find_elements(self, *loc):
-        logging.info('通过 %s: %s 查找元素' % (loc[0], loc[1]))
+        logging.info('通过 %s: %s 查找元素', loc[0], loc[1])
         elements = WebDriverWait(self.driver, 30).until(EC.presence_of_all_elements_located(locator=loc))
         return elements
 
@@ -51,20 +51,20 @@ class BaseWebPage(object):
                 return element
 
     def find_element_by_xpath(self, loc):
-        logging.info('通过 Xpath: %s 查找元素' % loc)
+        logging.info('通过 Xpath: %s 查找元素', loc)
         element = self.driver.find_element_by_xpath(loc)
         return element
 
     def click(self, loc):
         element = self.find_element(*loc)
         element.click()
-        logging.info('点击元素 %s: %s' % (loc[0], loc[1]))
+        logging.info('点击元素 %s: %s' , loc[0], loc[1])
         time.sleep(1)
 
     def clicks(self, loc, index):
         element = self.find_elements(*loc)
         element[index].click()
-        logging.info('点击元素 %s: %s, index %s' % (loc[0], loc[1], index))
+        logging.info('点击元素 %s: %s, index %s', loc[0], loc[1], index)
         time.sleep(1)
 
     def double_click(self, loc):
@@ -81,7 +81,7 @@ class BaseWebPage(object):
         if need_clear:
             logging.info('清除输入框内容')
             element.clear()
-        logging.info('输入值 %s' % text)
+        logging.info('输入值 %s', text)
         element.send_keys(text)
         if need_enter:
             logging.info('输入回车键')
@@ -93,7 +93,7 @@ class BaseWebPage(object):
         if need_clear:
             logging.info('清除输入框内容')
             element.clear()
-        logging.info('输入值 %s' % text)
+        logging.info('输入值 %s', text)
         element.send_keys(text)
 
     def switch_to_window(self, current_handle):
@@ -136,7 +136,7 @@ class BaseWebPage(object):
 
     @staticmethod
     def _select_options_by_value(element, option_value):
-        logging.info('Select Option %s, option %s' % (element, option_value))
+        logging.info('Select Option %s, option %s', element, option_value)
         Select(element).select_by_value(option_value)
 
     @staticmethod
@@ -147,13 +147,13 @@ class BaseWebPage(object):
     # 鼠标动作链
     def action_catena(self, element, types):
         if types == "悬停":
-            logging.info('悬停 %s' % element)
+            logging.info('悬停 %s', element)
             ActionChains(self.driver).move_to_element(element).perform()
         elif types == "双击":
-            logging.info('双击 %s' % element)
+            logging.info('双击 %s', element)
             ActionChains(self.driver).double_click(element).perform()
         elif types == "右击":
-            logging.info('右击 %s' % element)
+            logging.info('右击 %s', element)
             ActionChains(self.driver).context_click(element).perform()
 
     # 点击坐标
