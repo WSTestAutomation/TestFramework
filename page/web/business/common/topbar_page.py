@@ -15,7 +15,7 @@ class TopbarPage:
     accountManager_button = (By.ID, 'mectrl_main_trigger')
 
     # Stream action bar
-    home_link = (By.XPATH, '//a[contains(@data-bi-id, "topbar-home-button")]')
+    home_link = (By.XPATH, '//li[contains(@class, "home-menu-ite")]')
     discover_button = (By.ID, 'topbar-discover-navigation-button-desktop')
     discover_video_link = (By.XPATH, '//a[contains(@data-bi-id, "topbar-discover-video-link")]')
     discover_channel_link = (By.XPATH, '//a[contains(@data-bi-id, "topbar-discover-channel-link")]')

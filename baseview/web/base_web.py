@@ -58,7 +58,7 @@ class BaseWebPage(object):
     def click(self, loc):
         element = self.find_element(*loc)
         element.click()
-        logging.info('点击元素 %s: %s' , loc[0], loc[1])
+        logging.info('点击元素 %s: %s', loc[0], loc[1])
         time.sleep(1)
 
     def clicks(self, loc, index):

@@ -3,9 +3,9 @@
 # @Author  :
 # @File    : stream_topbar_business.py
 
+from enum import Enum
 from baseview.web.business_web import BusinessWebPage
 from page.web.business.common.topbar_page import TopbarPage as Page
-from enum import Enum
 from common.browser_engine import Logger
 
 class FeaturePage(Enum):
@@ -31,34 +31,31 @@ class FeaturePage(Enum):
     create_screen_recording = 35
 
 feature_locator = {
-    FeaturePage.home : Page.home_link,
-    FeaturePage.discover : Page.discover_button,
-    FeaturePage.discover_videos : Page.discover_video_link,
-    FeaturePage.discover_channels : Page.discover_channel_link
+    FeaturePage.home.value : Page.home_link,
+    FeaturePage.discover.value : Page.discover_button,
+    FeaturePage.discover_videos.value : Page.discover_video_link,
+    FeaturePage.discover_channels.value : Page.discover_channel_link
 
 }
 
 class Stream_topbar_business(BusinessWebPage):
 
-
-
     def __init__(self, driver):
         BusinessWebPage.__init__(self=self, driver=driver)
         self._page = Page()
 
-    def goto_homepage(self):
-        # TODO
-        pass
 
     def goto_feature_page(self, feature: FeaturePage):
-        # TODO
-        # 先点击下拉框        
-        button = feature_locator(feature // 10)
-        self.find_element(button).click()
-        # 再点击具体功能
-        if (feature_locator % 10 != 0):
-            link = feature_locator(feature)
-            self.find_element(link).click()
+        # 先点击下拉框
+        button = feature_locator[feature.value // 10 * 10]
+        self.click(*button)
         
-        pass
-            
+        # 再点击具体功能
+        if (feature.value % 10 != 0):
+            link = feature_locator[feature.value]
+            self.click(*link)
+
+    def goto_homepage(self):        
+        self.goto_feature_page(FeaturePage.home)
+        # TODO
+        # Ensure it is home page!!!
