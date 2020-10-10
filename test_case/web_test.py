@@ -8,7 +8,6 @@ sys.path.append(os.getcwd())
 import time
 import unittest
 from businessview.web.common.login_business import simple_login
-from businessview.web.common.stream_topbar_business import *
 from utilstest.base_runner import BaseWebTestCase
 from utilstest.base_yaml import Yaml
 from common.browser_engine import Logger
@@ -17,18 +16,14 @@ from common.browser_engine import Logger
 class web_test(BaseWebTestCase):
     def __init__(self, *args, **kwargs):
         BaseWebTestCase.__init__(self, *args, **kwargs)
-        #self.data = Yaml(Yaml.web_config_path).read()
-        #self.env = self.data['env']
 
     def test_mainpage(self):
+        # 登录，需要改配置文件指定环境、浏览器及登录凭证
         self.driver = simple_login()
-        stream_topbar_business = Stream_topbar_business(self.driver)
-        stream_topbar_business.goto_feature_page(FeaturePage.discover_videos)
-        stream_topbar_business.goto_feature_page(FeaturePage.mycontent_channels)
-        stream_topbar_business.goto_feature_page(FeaturePage.create_group)
-        stream_topbar_business.goto_homepage()
+        time.sleep(1)
+        # 添加步骤及断言
+        # self.assertTrue()
 
 
 if __name__ == '__main__':
     unittest.main()
-
