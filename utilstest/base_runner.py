@@ -3,13 +3,15 @@
 import os
 import unittest
 import warnings
+import logging
 from businessview.app.common.common_fun import Common
 from common.appium_desired import appium_android_desired, appium_desired
-
+from utilstest.base_log import Log
 base_dir = os.path.dirname(os.path.dirname(__file__))
 
 
 class BaseAppTestCase(unittest.TestCase):
+
     @classmethod
     def setUpClass(cls, env):
         warnings.simplefilter("ignore", ResourceWarning)
@@ -41,6 +43,7 @@ class BaseAppTestCase(unittest.TestCase):
 
 
 class BaseWebTestCase(unittest.TestCase):
+
     @classmethod
     def setUpClass(cls):
         warnings.simplefilter("ignore", ResourceWarning)
@@ -52,12 +55,14 @@ class BaseWebTestCase(unittest.TestCase):
 
     def setUp(self):
         self.driver = None
+        logging.info("-----Test Start-----")
 
     def tearDown(self):
         if self.driver is not None:
             self.driver.switch_to.default_content()
             self.driver.close()
             self.driver.quit()
+        logging.info("-----Test End-----")
 
     def save_img(self, img_name):
         img_path = os.path.join(base_dir, 'img')
