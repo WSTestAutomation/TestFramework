@@ -34,8 +34,12 @@ feature_locator = {
     FeaturePage.home.value : Page.home_link,
     FeaturePage.discover.value : Page.discover_button,
     FeaturePage.discover_videos.value : Page.discover_video_link,
-    FeaturePage.discover_channels.value : Page.discover_channel_link
-
+    FeaturePage.discover_channels.value : Page.discover_channel_link,
+    FeaturePage.discover_groups.value : Page.discover_group_link,
+    FeaturePage.mycontent.value : Page.myContent_button,
+    FeaturePage.mycontent_videos.value : Page.myContent_videos_link,
+    FeaturePage.create.value : Page.create_button,
+    FeaturePage.create_video.value : Page.create_upload_link,
 }
 
 class Stream_topbar_business(BusinessWebPage):
@@ -48,12 +52,12 @@ class Stream_topbar_business(BusinessWebPage):
     def goto_feature_page(self, feature: FeaturePage):
         # 先点击下拉框
         button = feature_locator[feature.value // 10 * 10]
-        self.click(*button)
+        self.click(button)
         
         # 再点击具体功能
         if (feature.value % 10 != 0):
             link = feature_locator[feature.value]
-            self.click(*link)
+            self.click(link)
 
     def goto_homepage(self):        
         self.goto_feature_page(FeaturePage.home)

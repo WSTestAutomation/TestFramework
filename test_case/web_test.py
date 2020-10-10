@@ -24,8 +24,9 @@ class web_test(BaseWebTestCase):
         self.driver = simple_login()
         stream_topbar_business = Stream_topbar_business(self.driver)
         stream_topbar_business.goto_feature_page(FeaturePage.discover_videos)
+        stream_topbar_business.goto_feature_page(FeaturePage.mycontent_channels)
+        stream_topbar_business.goto_feature_page(FeaturePage.create_group)
         stream_topbar_business.goto_homepage()
-        pass
 
 
 if __name__ == '__main__':
