@@ -12,4 +12,3 @@ class LoginPage(BasePage):
     yes_button = (By.XPATH, '//input[@value="Yes" or @value="是"]')
     no_button = (By.XPATH, '//input[@value="No" or @value="否"]')
 
-
