@@ -25,7 +25,7 @@ class web_test(BaseWebTestCase):
         time.sleep(1)
         # 添加步骤及断言
         # self.assertTrue()
-        
+
+
 if __name__ == '__main__':
     unittest.main()
-

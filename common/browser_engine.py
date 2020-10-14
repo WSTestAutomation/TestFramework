@@ -20,7 +20,7 @@ elif sys.platform.__eq__('darwin'):
     chrome_driver_path = os.path.join(base_dir, 'drivers', 'chromedriver')
 
 
-def open_browser(env, browser='chrome'):
+def open_browser(env, browser='chrome'):    
     driver = None
     if browser == "chrome":
         chrome_options = webdriver.ChromeOptions()
@@ -45,6 +45,7 @@ def open_browser(env, browser='chrome'):
     web_config_path = os.path.join(base_dir, 'config/web_config.yaml')
     with open(web_config_path, 'r', encoding='utf-8') as file:
         data = yaml.load(file, Loader=yaml.FullLoader)
+
     # 以下是一个示例，基于config/web_config.yaml文件做的配置
     if env == "msit":
         url = data["portal"]['msit']

@@ -3,7 +3,7 @@
 import logging
 import random
 from baseview.web.base_web import BaseWebPage, time
-from page.web.business_page import BusinessPage
+from page.web.business.common.business_page import BusinessPage
 
 
 class BusinessWebPage(BaseWebPage):
@@ -11,6 +11,8 @@ class BusinessWebPage(BaseWebPage):
         BaseWebPage.__init__(self, driver)
         self._page = BusinessPage()
 
+
+"""
     def _switch_info_window(self, handle, message="处理成功！", wait_time=None, is_pass=False):
         logging.info('处理信息反馈')
         if wait_time is not None:
@@ -40,6 +42,7 @@ class BusinessWebPage(BaseWebPage):
         value = random.choice(options).get_attribute('value')
         self._select_options_by_value(element, value)
 
+
     def accept_alert_message(self, message):
         logging.info('处理弹出')
         alert_box = self.switch_to_alert()
@@ -51,3 +54,4 @@ class BusinessWebPage(BaseWebPage):
         alert_box = self.switch_to_alert()
         assert alert_box.text == message
         alert_box.dismiss()
+"""
