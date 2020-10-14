@@ -3,8 +3,7 @@
 from baseview.web.business_web import BusinessWebPage
 from page.web.business.common.login_page import LoginPage as Page
 from utilstest.base_yaml import Yaml
-from common.browser_engine import Logger
-from common.browser_engine import open_browser
+from common.browser_engine import Logger, open_browser
 
 data = Yaml(Yaml.web_config_path).read()
 env = data['env']
