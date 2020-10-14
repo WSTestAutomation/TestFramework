@@ -10,4 +10,3 @@ class BasePage:
     sign_button = (By.CSS_SELECTOR, 'span[class="submit"]')
     yes_button = (By.CSS_SELECTOR, 'input[value="Yes"]')
     no_button = (By.CSS_SELECTOR, 'input[value="No"]')
-
