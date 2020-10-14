@@ -11,6 +11,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import TimeoutException
 
 
 class BaseWebPage(object):
@@ -186,3 +187,13 @@ class BaseWebPage(object):
             logging.info('未找到元素')
             return False
         return True
+
+    def is_element_clickable(self, loc):
+        if self.is_element_present(loc):
+            try:
+                # 已确认元素存在，减少等待时间。
+                WebDriverWait(self.driver, 1).until(EC.element_to_be_clickable(locator=loc))
+            except TimeoutException:
+                logging.info('元素存在但无法点击。可能被遮挡。')
+                return False
+            return True
