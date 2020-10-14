@@ -19,29 +19,29 @@ class BaseAppPage(object):
         self.driver = driver
 
     def find_element(self, *loc):
-        logging.info('通过 %s: %s 查找元素' % (loc[0], loc[1]))
+        logging.info('通过 %s: %s 查找元素' , loc[0], loc[1])
         element = WebDriverWait(self.driver, 30).until(EC.presence_of_element_located(locator=loc))
         return element
 
     def find_elements(self, *loc):
-        logging.info('过 %s: %s 查找元素' % (loc[0], loc[1]))
+        logging.info('过 %s: %s 查找元素' , loc[0], loc[1])
         elements = WebDriverWait(self.driver, 30).until(EC.presence_of_all_elements_located(locator=loc))
         return elements
 
     def get_attribute(self, loc, name):
         element = self.find_element(*loc)
-        logging.info('获取元素的属性值 {}' % name)
+        logging.info('获取元素的属性值 %s', name)
         return element.get_attribute(name)
 
     def click(self, loc):
         element = self.find_element(*loc)
-        logging.info('点击元素 %s: %s' % (loc[0], loc[1]))
+        logging.info('点击元素 %s: %s', loc[0], loc[1])
         element.click()
         time.sleep(1)
 
     def clicks(self, loc, index):
         elements = self.find_elements(*loc)
-        logging.info('点击元素 %s: %s, index %s' % (loc[0], loc[1], index))
+        logging.info('点击元素 %s: %s, index %s' , loc[0], loc[1], index)
         elements[index].click()
         time.sleep(1)
 
@@ -51,7 +51,7 @@ class BaseAppPage(object):
         if need_clear:
             logging.info('清除输入框已存在的内容')
             element.clear()
-        logging.info('输入值 %s' % text)
+        logging.info('输入值 %s', text)
         element.set_value(text)
         if need_hide_keyboard:
             logging.info('隐藏输入键盘')
@@ -60,7 +60,7 @@ class BaseAppPage(object):
     def set_value_by_index(self, loc, text, index):
         element = self.find_elements(*loc)[index]
         element.click()
-        logging.info('输入值 %s' % text)
+        logging.info('输入值 %s', text)
         element.set_value(text)
         self.click(self.btn)
 
@@ -116,11 +116,11 @@ class BaseAppPage(object):
                                                                     "toY": end_y})
 
     def _find_element(self, *loc, time_=5):
-        logging.info('通过 %s: %s 查找元素' % (loc[0], loc[1]))
+        logging.info('通过 %s: %s 查找元素', loc[0], loc[1])
         element = WebDriverWait(self.driver, time_).until(EC.presence_of_element_located(locator=loc))
         return element
 
     def _find_elements(self, *loc, time_=5):
-        logging.info('通过 %s: %s 查找元素' % (loc[0], loc[1]))
+        logging.info('通过 %s: %s 查找元素', loc[0], loc[1])
         elements = WebDriverWait(self.driver, time_).until(EC.presence_of_all_elements_located(locator=loc))
         return elements

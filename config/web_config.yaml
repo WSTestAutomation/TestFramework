@@ -1,4 +1,5 @@
-env: ppe
+env: srol1
+browser: chrome
 portal:
   msit: https://msit.microsoftstream.com
   ppe: https://ppe.microsoftstream.com
@@ -15,5 +16,5 @@ user:
   streamadmin: streamadmin@media.ccsctp.net
   personalAccount: XXX@microsoft.com
 pwd:
-  commonpwd: XXXX
-implicitly_wait: 120
+  commonpwd: xxxxx
+implicitly_wait: 60
