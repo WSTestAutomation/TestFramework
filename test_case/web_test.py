@@ -7,37 +7,25 @@ sys.path.append(os.getcwd())
 
 import time
 import unittest
-from businessview.web.common.login_business import LoginBusiness
+from businessview.web.common.login_business import simple_login
 from BeautifulReport.BeautifulReport import BeautifulReport
-from common.browser_engine import open_browser
 from utilstest.base_runner import BaseWebTestCase
 from utilstest.base_yaml import Yaml
+from common.browser_engine import Logger
 
 
 class web_test(BaseWebTestCase):
-    def __init__(self,*args,**kwargs):
-        unittest.TestCase.__init__(self,*args,**kwargs)
-        self.data = Yaml(Yaml.web_config_path).read()
-        self.env = self.data['env']
+    def __init__(self, *args, **kwargs):
+        BaseWebTestCase.__init__(self, *args, **kwargs)
 
-    @BeautifulReport.add_test_img('web_test_login_{}'.format(time.strftime('%Y%m%d%H%M%S')))
-    def test_login(self):
+    @BeautifulReport.add_test_img('test_mainpage{}'.format(time.strftime('%Y%m%d%H%M%S')))
+    def test_mainpage(self):
+        # 登录，需要改配置文件指定环境、浏览器及登录凭证
+        self.driver = simple_login()
+        time.sleep(1)
+        # 添加步骤及断言
+        # self.assertTrue()
 
-        self.logger.info("Login to", self.env)
-        self.driver = open_browser(self.env,'chrome')
-        _loginBusiness = LoginBusiness(driver=self.driver)
 
-        """
-        # for SROL1 and SROL2, we can use test accounts
-        _loginBusiness.login(self.data['user']['test1'], self.data['pwd']['commonpwd'])
-        """
-        # For PPE and MSIT, we can use our personal accounts.
-        # MSIT may meet some additional steps for security reason which bloacks the test
-        # PPE is much slower and need to wait for more seconds.
-        _loginBusiness.login('Your Account', 'Your Password')
-
-        self.logger.info("Test End")
-        
 if __name__ == '__main__':
     unittest.main()
-

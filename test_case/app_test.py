@@ -17,7 +17,7 @@ from utilstest.base_runner import BaseAppTestCase
 
 class TestScenario1(BaseAppTestCase):
     @classmethod
-    def setUpClass(cls):
+    def setUpClass(cls, env):
         super(TestScenario1, cls).setUpClass(env="ios")
 
     @BeautifulReport.add_test_img('test_app_{}'.format(time.strftime('%Y%m%d%H%M%S')))

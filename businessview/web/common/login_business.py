@@ -1,41 +1,55 @@
 # coding=utf-8
 
-from baseview.web.base_web import BaseWebPage
-from page.web.login_page import LoginPage as Page
+from baseview.web.business_web import BusinessWebPage
+from page.web.business.common.login_page import LoginPage as Page
 from utilstest.base_yaml import Yaml
-import time
-import pyautogui
-from utilstest.base_log import Log
+from common.browser_engine import Logger, open_browser
 
+data = Yaml(Yaml.web_config_path).read()
+env = data['env']
+browser = data['browser']
+username = data['user']['test1']
+password = data['pwd']['commonpwd']
 
-class LoginBusiness(BaseWebPage):
-
-    data = Yaml(Yaml.web_config_path).read()
-    username = data['user']['personalAccount']
-    password = data['pwd']['commonpwd']
+class LoginBusiness(BusinessWebPage):
 
     def __init__(self, driver):
-        BaseWebPage.__init__(self=self, driver=driver)
+        BusinessWebPage.__init__(self=self, driver=driver)
         self._page = Page()
-        self.logging = Log().get_logger()
 
-    def login(self, user_name=username, password=password):
-        if  not self.driver.title.startswith('Sign in to your account'):
-            raise Exception('Not in the LoginPage.')
+    def login(self, user=username, pwd=password):
+        is_sucess = False
+        if not self.driver.title.startswith('Sign in to your account'):
+            # If there's a critial failure and we cannot go ahead, use Logger.excetpion()
+            Logger.exception('Not in the LoginPage.')
+
         try:
-            self.send_keys(self._page.user_name_input, user_name)
-            self.click(self._page.next_button)
+            self.send_keys(self._page.user_name_input, user)
+            self.click(self._page.next_input)
             # TODO: there is a popup window here and possible we need to input credentials in a differet way...
 
-            self.send_keys(self._page.password_input, password)
+            self.send_keys(self._page.password_input, pwd)
             self.click(self._page.signin_input)
             if self.driver.current_url.startswith('https://login.windows-ppe.net/common/login'):
                 self.click(self._page.no_button)
 
             # Now it should be in Homepage!
-            if user_name in self.driver.page_source:
-                self.logging.info('%s is signed in.', user_name)
+            if user in self.driver.page_source:
+                Logger.info('%s is signed in.', user)
+                is_sucess = True
             else:
-                self.logging.error('Sign in failed')
+                Logger.error('Sign in failed')
         except Exception as e:
-            self.logging.critical('Exception: %s', format(e))
+            Logger.error('Exception: %s', format(e))
+        finally:
+            return is_sucess
+
+
+def simple_login():
+    Logger.info("Login to %s", env)
+    driver = open_browser(env, browser)
+    login_business = LoginBusiness(driver)
+    is_login = login_business.login(user=username, pwd=password)
+    if is_login:
+        return driver
+    return None
