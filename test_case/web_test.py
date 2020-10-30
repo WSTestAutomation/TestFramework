@@ -8,6 +8,7 @@ sys.path.append(os.getcwd())
 import time
 import unittest
 from businessview.web.common.login_business import simple_login
+from BeautifulReport.BeautifulReport import BeautifulReport
 from businessview.web.common.stream_topbar_business import *
 from utilstest.base_runner import BaseWebTestCase
 from utilstest.base_yaml import Yaml
@@ -20,6 +21,7 @@ class web_test(BaseWebTestCase):
         #self.data = Yaml(Yaml.web_config_path).read()
         #self.env = self.data['env']
 
+    @BeautifulReport.add_test_img('test_mainpage{}'.format(time.strftime('%Y%m%d%H%M%S')))
     def test_mainpage(self):
         self.driver = simple_login()
         stream_topbar_business = Stream_topbar_business(self.driver)
@@ -27,7 +29,7 @@ class web_test(BaseWebTestCase):
         stream_topbar_business.goto_feature_page(FeaturePage.mycontent_channels)
         stream_topbar_business.goto_feature_page(FeaturePage.create_group)
         stream_topbar_business.goto_homepage()
-
+        #self.assertTrue()
 
 if __name__ == '__main__':
     unittest.main()

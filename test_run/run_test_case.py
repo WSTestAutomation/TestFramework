@@ -22,5 +22,5 @@ report_file = "autotest_report_" + time.strftime('%Y%m%d%H%M%S') + ".html"
 result.report(filename=report_file,
               description='Ui Automation Report', log_path=report_path)
 
-report = os.path.join(report_path, report_file)
-# Email(receiver='', path=report).send()
+report_file_path = os.path.join(report_path, report_file)
+# Email(receiver='', path=report_file_path).send()
