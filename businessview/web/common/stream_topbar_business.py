@@ -38,6 +38,7 @@ feature_locator = {
     FeaturePage.discover_groups.value : Page.discover_group_link,
     FeaturePage.mycontent.value : Page.myContent_button,
     FeaturePage.mycontent_videos.value : Page.myContent_videos_link,
+    FeaturePage.mycontent_channels.value : Page.myContent_channels_link,
     FeaturePage.create.value : Page.create_button,
     FeaturePage.create_video.value : Page.create_upload_link,
 }
@@ -60,6 +61,6 @@ class Stream_topbar_business(BusinessWebPage):
             self.click(link)
 
     def goto_homepage(self):        
-        self.goto_feature_page(FeaturePage.home)
+        self.goto_feature_page(FeaturePage.home)        
         # TODO
         # Ensure it is home page!!!
