@@ -14,11 +14,11 @@ class Stream_topbar_business(BusinessWebPage):
         self._page = Page()
         self.discover_button_element = None
         self.discover_dropmenu_element = None
-        self.discover_dropdown_menu_tuple = (   self._page.discover_video_link,
-                                                self._page.discover_channel_link,
-                                                self._page.discover_people_link,
-                                                self._page.discover_group_link
-                                            )
+        self.discover_dropdown_menu_dict = {'video':    self._page.discover_video_link,
+                                            'channel':  self._page.discover_channel_link,
+                                            'people':   self._page.discover_people_link,
+                                            'group':    self._page.discover_group_link
+                                            }
 
     def click_topbar_button(self, fname):
         if self.is_element_clickable(fname):

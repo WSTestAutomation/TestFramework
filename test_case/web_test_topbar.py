@@ -47,16 +47,20 @@ class web_test(BaseWebTestCase):
         # discover menu
         stream_topbar_business.click_topbar_button_home()
         self.assertTrue(self.driver.current_url.rstrip("/") == self.homeUrl, '正在浏览主页')
-        for it in stream_topbar_business.discover_dropdown_menu_tuple:
+        for it in stream_topbar_business.discover_dropdown_menu_dict:
             stream_topbar_business.click_topbar_button_discover()
             self.assertTrue(stream_topbar_business.discover_button_element.get_attribute("aria-expanded") == 'true', '展开discover菜单')
             self.assertTrue(stream_topbar_business.discover_dropmenu_element.get_attribute("aria-hidden") == 'false', '显示discover菜单')
-            menu_link_element = stream_topbar_business.find_element(*it)
+            menu_link_element = stream_topbar_business.find_element(*stream_topbar_business.discover_dropdown_menu_dict[it])
             expect_url = menu_link_element.get_attribute("href")
-            stream_topbar_business.click_topbar_link(it)
+            stream_topbar_business.click_topbar_link(stream_topbar_business.discover_dropdown_menu_dict[it])
             self.assertTrue(self.driver.current_url.rstrip("/") == expect_url, '正在浏览 ' + expect_url)
             stream_topbar_business.click_topbar_button_home()
             self.assertTrue(self.driver.current_url.rstrip("/") == self.homeUrl, '正在浏览主页')
-
+        
+        # dicover video link
+        stream_topbar_business.click_topbar_button_discover()
+        stream_topbar_business.click_topbar_link(stream_topbar_business.discover_dropdown_menu_dict['video'])
+        
 if __name__ == '__main__':
     unittest.main()
