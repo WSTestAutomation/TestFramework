@@ -188,11 +188,11 @@ class BaseWebPage(object):
             return False
         return True
 
-    def is_element_clickable(self, loc):
+    def is_element_clickable(self, loc, timeout=1):
         if self.is_element_present(loc):
             try:
                 # 已确认元素存在，减少等待时间。
-                WebDriverWait(self.driver, 1).until(EC.element_to_be_clickable(locator=loc))
+                WebDriverWait(self.driver, timeout).until(EC.element_to_be_clickable(locator=loc))
             except TimeoutException:
                 logging.info('元素存在但无法点击。可能被遮挡。')
                 return False
