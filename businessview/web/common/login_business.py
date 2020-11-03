@@ -1,5 +1,6 @@
 # coding=utf-8
 
+import time
 from baseview.web.business_web import BusinessWebPage
 from page.web.business.common.login_page import LoginPage as Page
 from utilstest.base_yaml import Yaml
@@ -28,7 +29,7 @@ class LoginBusiness(BusinessWebPage):
             self.send_keys(self._page.user_name_input, user)
             self.click(self._page.next_input)
             # TODO: there is a popup window here and possible we need to input credentials in a differet way...
-
+            time.sleep(3)
             self.send_keys(self._page.password_input, pwd)
             self.click(self._page.signin_input)
             if self.driver.current_url.startswith('https://login.windows-ppe.net/common/login'):

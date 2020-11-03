@@ -45,7 +45,7 @@ def appium_android_desired(caps):
         "platformVersion": get_android_devices_version(),
         "deviceName": get_device_name(),
         "deviceId": get_android_devices_id(),
-        "app": data["app"],
+        #"app": data["app"],
         "appPackage": data["appPackage"],        
         "appActivity": data["appActivity"],
         "noReset": data["noReset"],

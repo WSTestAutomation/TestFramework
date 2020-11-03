@@ -40,4 +40,5 @@ class app_test(BaseAppTestCase):
         pass
 
 if __name__ == '__main__':
+    #如果无法连接设备，先确认是否开启了appium server
     unittest.main()
