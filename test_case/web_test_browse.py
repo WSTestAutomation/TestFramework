@@ -31,7 +31,7 @@ class web_test(BaseWebTestCase):
 
         # dicover video link
         stream_topbar_business.click_topbar_button_discover()
-        stream_topbar_business.click_topbar_link(stream_topbar_business.discover_dropdown_menu_dict['video'])
+        stream_topbar_business.click_topbar_link(stream_topbar_business.discover_dropdown_menu_dict['Videos'])
 
         # in browse page
         stream_browse_business.wait_for_videos_be_loaded()

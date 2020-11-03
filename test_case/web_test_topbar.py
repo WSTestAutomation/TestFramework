@@ -31,18 +31,19 @@ class web_test(BaseWebTestCase):
 
         # discover button
         stream_topbar_business.click_topbar_button_discover()
-        self.assertTrue(stream_topbar_business.discover_button_element.get_attribute("aria-expanded") == 'true', '展开discover菜单')
-        self.assertTrue(stream_topbar_business.discover_dropmenu_element.get_attribute("aria-hidden") == 'false', '显示discover菜单')
+        # TODO: wrap get_attribute from here to buissness.py
+        #self.assertTrue(stream_topbar_business.discover_button_element.get_attribute("aria-expanded") == 'true', '展开discover菜单')
+        #self.assertTrue(stream_topbar_business.discover_dropmenu_element.get_attribute("aria-hidden") == 'false', '显示discover菜单')
         stream_topbar_business.click_topbar_button_discover()
-        self.assertTrue(stream_topbar_business.discover_button_element.get_attribute("aria-expanded") == 'false', '收起discover菜单')
-        self.assertTrue(stream_topbar_business.discover_dropmenu_element.get_attribute("aria-hidden") == 'true', '隐藏discover菜单')
+        #self.assertTrue(stream_topbar_business.discover_button_element.get_attribute("aria-expanded") == 'false', '收起discover菜单')
+        #self.assertTrue(stream_topbar_business.discover_dropmenu_element.get_attribute("aria-hidden") == 'true', '隐藏discover菜单')
         stream_topbar_business.click_topbar_button_discover()
-        self.assertTrue(stream_topbar_business.discover_button_element.get_attribute("aria-expanded") == 'true', '展开discover菜单')
-        self.assertTrue(stream_topbar_business.discover_dropmenu_element.get_attribute("aria-hidden") == 'false', '显示discover菜单')
+        #self.assertTrue(stream_topbar_business.discover_button_element.get_attribute("aria-expanded") == 'true', '展开discover菜单')
+        #self.assertTrue(stream_topbar_business.discover_dropmenu_element.get_attribute("aria-hidden") == 'false', '显示discover菜单')
         stream_topbar_business.click_topbar_button_home()
         self.assertTrue(self.driver.current_url.rstrip("/") == self.homeUrl, '正在浏览主页')
-        self.assertTrue(stream_topbar_business.discover_button_element.get_attribute("aria-expanded") == 'false', '收起discover菜单')
-        self.assertTrue(stream_topbar_business.discover_dropmenu_element.get_attribute("aria-hidden") == 'true', '隐藏discover菜单')
+        #self.assertTrue(stream_topbar_business.discover_button_element.get_attribute("aria-expanded") == 'false', '收起discover菜单')
+        #self.assertTrue(stream_topbar_business.discover_dropmenu_element.get_attribute("aria-hidden") == 'true', '隐藏discover菜单')
 
         # discover menu
         stream_topbar_business.click_topbar_button_home()
@@ -60,7 +61,7 @@ class web_test(BaseWebTestCase):
         
         # dicover video link
         stream_topbar_business.click_topbar_button_discover()
-        stream_topbar_business.click_topbar_link(stream_topbar_business.discover_dropdown_menu_dict['video'])
+        stream_topbar_business.click_topbar_link(stream_topbar_business.discover_dropdown_menu_dict['Videos'])
         
 if __name__ == '__main__':
     unittest.main()
