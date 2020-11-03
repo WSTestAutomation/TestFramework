@@ -2,9 +2,9 @@
 # @Time    :
 # @Author  :
 # @File    : topbar_page.py
-
+ 
 from selenium.webdriver.common.by import By
-
+ 
 class TopbarPage:
     # O365 top bar
     appLauncher_button = (By.ID, 'O365_MainLink_NavMenu')
@@ -13,7 +13,7 @@ class TopbarPage:
     settings_button = (By.ID, 'O365_MainLink_Settings')
     help_button = (By.ID, 'O365_MainLink_Help')
     accountManager_button = (By.ID, 'mectrl_main_trigger')
-
+ 
     # Stream action bar
     home_link = (By.XPATH, '//li[contains(@class, "home-menu-ite")]')
     discover_button = (By.ID, 'topbar-discover-navigation-button-desktop')
