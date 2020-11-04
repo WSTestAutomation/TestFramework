@@ -10,7 +10,6 @@ from common.browser_engine import Logger
 
 
 class Stream_topbar_business(BusinessWebPage):
-
     def __init__(self, driver):
         BusinessWebPage.__init__(self=self, driver=driver)
         self._page = Page()
