@@ -4,31 +4,24 @@ import os
 import unittest
 import warnings
 import logging
-from businessview.app.common.common_fun import Common
-from common.appium_desired import appium_android_desired, appium_desired
 from utilstest.base_log import Log
 base_dir = os.path.dirname(os.path.dirname(__file__))
 
 
 class BaseAppTestCase(unittest.TestCase):
+    driver = None
 
     @classmethod
-    def setUpClass(cls, env):
+    def setUpClass(cls):
         warnings.simplefilter("ignore", ResourceWarning)
         warnings.simplefilter("ignore", DeprecationWarning)
 
-        if env == 'None':
-            cls.driver = None
-        elif env =='ios':
-            cls.driver = appium_desired('app_path', 4723)
-            cls.common = Common(cls.driver)
-            # cls.common.select_env_and_confirm(5)
-        elif env =='android':
-            cls.driver = appium_android_desired()
-
     @classmethod
     def tearDownClass(cls):
-        pass
+        if cls.driver is not None:
+            cls.driver.switch_to.default_content()
+            cls.driver.close()
+            cls.driver.quit()
 
     def setUp(self):
         pass
@@ -43,6 +36,7 @@ class BaseAppTestCase(unittest.TestCase):
 
 
 class BaseWebTestCase(unittest.TestCase):
+    driver = None
 
     @classmethod
     def setUpClass(cls):
@@ -51,17 +45,15 @@ class BaseWebTestCase(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        pass
+        if cls.driver is not None:
+            cls.driver.switch_to.default_content()
+            cls.driver.close()
+            cls.driver.quit()
 
     def setUp(self):
-        self.driver = None
         logging.info("-----Test Start-----")
 
     def tearDown(self):
-        if self.driver is not None:
-            self.driver.switch_to.default_content()
-            self.driver.close()
-            self.driver.quit()
         logging.info("-----Test End-----")
 
     def save_img(self, img_name):

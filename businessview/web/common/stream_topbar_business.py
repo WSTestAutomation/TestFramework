@@ -8,6 +8,7 @@ from baseview.web.business_web import BusinessWebPage
 from page.web.business.common.topbar_page import TopbarPage as Page
 from common.browser_engine import Logger
 
+
 class Stream_topbar_business(BusinessWebPage):
     def __init__(self, driver):
         BusinessWebPage.__init__(self=self, driver=driver)

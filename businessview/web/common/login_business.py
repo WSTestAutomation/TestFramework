@@ -1,16 +1,17 @@
 # coding=utf-8
 
+import time
 from baseview.web.business_web import BusinessWebPage
 from page.web.business.common.login_page import LoginPage as Page
 from utilstest.base_yaml import Yaml
 from common.browser_engine import Logger
 from common.browser_engine import open_browser
 
-data = Yaml(Yaml.web_config_path).read()
-env = data['env']
-browser = data['browser']
-username = data['user']['test1']
-password = data['pwd']['commonpwd']
+DATA = Yaml(Yaml.web_config_path).read()
+ENV = DATA['env']
+BROWSER = DATA['browser']
+USERNAME = DATA['user']['test1']
+PASSWORD = DATA['pwd']['commonpwd']
 
 class LoginBusiness(BusinessWebPage):
 
@@ -18,7 +19,7 @@ class LoginBusiness(BusinessWebPage):
         BusinessWebPage.__init__(self=self, driver=driver)
         self._page = Page()
 
-    def login(self, user=username, pwd=password):
+    def login(self, user, pwd):
         is_sucess = False
         if not self.driver.title.startswith('Sign in to your account'):
             # If there's a critial failure and we cannot go ahead, use Logger.excetpion()
@@ -28,7 +29,7 @@ class LoginBusiness(BusinessWebPage):
             self.send_keys(self._page.user_name_input, user)
             self.click(self._page.next_input)
             # TODO: there is a popup window here and possible we need to input credentials in a differet way...
-
+            time.sleep(3)
             self.send_keys(self._page.password_input, pwd)
             self.click(self._page.signin_input)
             if self.driver.current_url.startswith('https://login.windows-ppe.net/common/login'):
@@ -47,10 +48,10 @@ class LoginBusiness(BusinessWebPage):
 
 
 def simple_login():
-    Logger.info("Login to %s", env)
-    driver = open_browser(env, browser)
+    Logger.info("Login to %s", ENV)
+    driver = open_browser(ENV, BROWSER)
     login_business = LoginBusiness(driver)
-    is_login = login_business.login(user=username, pwd=password)
+    is_login = login_business.login(user=USERNAME, pwd=PASSWORD)
     if is_login:
         return driver
     return None
