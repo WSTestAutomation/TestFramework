@@ -11,7 +11,9 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import TimeoutException
 
+timeout_webdriverwait = 60
 
 class BaseWebPage(object):
 
@@ -36,12 +38,12 @@ class BaseWebPage(object):
 
     def find_element(self, *loc):
         logging.info('通过 %s: %s 查找元素', loc[0], loc[1])
-        element = WebDriverWait(self.driver, 30).until(EC.presence_of_element_located(locator=loc))
+        element = WebDriverWait(self.driver, timeout_webdriverwait).until(EC.presence_of_element_located(locator=loc))
         return element
 
     def find_elements(self, *loc):
         logging.info('通过 %s: %s 查找元素', loc[0], loc[1])
-        elements = WebDriverWait(self.driver, 30).until(EC.presence_of_all_elements_located(locator=loc))
+        elements = WebDriverWait(self.driver, timeout_webdriverwait).until(EC.presence_of_all_elements_located(locator=loc))
         return elements
 
     def find_element_by_text(self, loc, text):
@@ -131,7 +133,7 @@ class BaseWebPage(object):
         self.driver.switch_to.default_content()
 
     def switch_to_alert(self):
-        alert = WebDriverWait(self.driver, 30).until(EC.alert_is_present(), message='No alert show')
+        alert = WebDriverWait(self.driver, timeout_webdriverwait).until(EC.alert_is_present(), message='No alert show')
         return alert
 
     @staticmethod
@@ -186,3 +188,13 @@ class BaseWebPage(object):
             logging.info('未找到元素')
             return False
         return True
+
+    def is_element_clickable(self, loc, timeout=1):
+        if self.is_element_present(loc):
+            try:
+                # 已确认元素存在，减少等待时间。
+                WebDriverWait(self.driver, timeout).until(EC.element_to_be_clickable(locator=loc))
+            except TimeoutException:
+                logging.info('元素存在但无法点击。可能被遮挡。')
+                return False
+            return True

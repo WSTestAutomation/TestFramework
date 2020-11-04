@@ -18,14 +18,14 @@ class BaseAppPage(object):
     def __init__(self, driver):
         self.driver = driver
 
-    def find_element(self, *loc):
-        logging.info('通过 %s: %s 查找元素' , loc[0], loc[1])
-        element = WebDriverWait(self.driver, 30).until(EC.presence_of_element_located(locator=loc))
+    def find_element(self, *loc, time_=5):
+        logging.info('通过 %s: %s 查找元素', loc[0], loc[1])
+        element = WebDriverWait(self.driver, time_).until(EC.presence_of_element_located(locator=loc))
         return element
 
-    def find_elements(self, *loc):
-        logging.info('过 %s: %s 查找元素' , loc[0], loc[1])
-        elements = WebDriverWait(self.driver, 30).until(EC.presence_of_all_elements_located(locator=loc))
+    def find_elements(self, *loc, time_=5):
+        logging.info('过 %s: %s 查找元素', loc[0], loc[1])
+        elements = WebDriverWait(self.driver, time_).until(EC.presence_of_all_elements_located(locator=loc))
         return elements
 
     def get_attribute(self, loc, name):
