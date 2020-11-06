@@ -408,7 +408,7 @@ class BeautifulReport(ReportTestResult, PATH):
             data = file.read()
         return base64.b64encode(data).decode()
 
-    def add_test_img(*pargs):
+    def add_test_img(self, *pargs):
         """
             接受若干个图片元素, 并展示在测试报告中
         :param pargs:
@@ -448,7 +448,7 @@ class BeautifulReport(ReportTestResult, PATH):
 
         return _wrap
 
-    def depend_on(*pargs):
+    def depend_on(self, *pargs):
         def wrap(function):
             @wraps(function)
             def _wrap(self):
