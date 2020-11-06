@@ -7,5 +7,5 @@ def upload_by_keys(file):
     test_data_path = os.path.join(base_dir, 'test_data')
     filename = '{}{}{}'.format(test_data_path, os.sep, file)
     pyautogui.sleep(1)
-    pyautogui.typewrite(filename, pause=0.5)
-    pyautogui.press('enter', pause=0.5)
+    pyautogui.typewrite(filename, interval=0.5)
+    pyautogui.press('enter', interval=0.5)
