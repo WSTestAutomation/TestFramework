@@ -3,12 +3,9 @@
 # @Author  :
 # @File    :
 
-import os
 import time
-import sys
 import unittest
-import logging
-from ui.lib.appium_desired import appium_android_desired, appium_ios_desired
+from ui.lib.appium_desired import appium_desired
 from ui.view.businessview.app.demo_baidumap import Demo_BaiduMap
 from ui.lib.base_runner import BaseAppTestCase
 from common.package.BeautifulReport.BeautifulReport import BeautifulReport
@@ -17,7 +14,7 @@ from common.package.BeautifulReport.BeautifulReport import BeautifulReport
 class app_test(BaseAppTestCase):
     @classmethod
     def setUpClass(cls):
-        cls.driver = appium_android_desired("android_baidumap")
+        cls.driver = appium_desired("android_baidumap")
 
     @BeautifulReport.add_test_img(BaseAppTestCase.output_dir, 'app_test_test_1{}'.format(time.strftime('%Y%m%d%H%M%S')))
     def test_1_search_location(self):

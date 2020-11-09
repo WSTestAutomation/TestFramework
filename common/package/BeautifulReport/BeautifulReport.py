@@ -378,6 +378,8 @@ class BeautifulReport(ReportTestResult, PATH):
         override_path = os.path.abspath(self.log_path) if \
             os.path.abspath(self.log_path).endswith('/') else \
             os.path.abspath(self.log_path) + '/'
+        if not os.path.exists(override_path):
+            os.makedirs(override_path)
 
         with open(template_path, 'rb') as file:
             body = file.readlines()
