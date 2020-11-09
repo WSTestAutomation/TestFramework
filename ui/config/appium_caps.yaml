@@ -1,0 +1,32 @@
+ios:
+  platformName: ios
+  app: xxxx
+  automationName: XCUITest
+  noReset: True
+  useNewWDA: False
+  commandTimeouts: 35000
+  newCommandTimeout: 10000
+  ip: 127.0.0.1
+  port: 4723
+
+android:
+  platformName: Android
+  app: xxxx   # 要安装的app的包的路径，如果不需要安装则无需提供
+  appPackage: xxx
+  appActivity: xxx
+  unicodeKeyboard: True
+  resetKeyboard: True
+  ip: 127.0.0.1
+  port: 4723
+  noReset: True
+
+android_baidumap:
+  platformName: Android
+  #app: xxxx    # 要安装的app的包的路径，如果不需要安装则无需提供
+  appPackage: 'com.baidu.BaiduMap'
+  appActivity: 'com.baidu.baidumaps.MapsActivity'
+  unicodeKeyboard: True
+  resetKeyboard: True
+  ip: 127.0.0.1
+  port: 4723
+  noReset: True
