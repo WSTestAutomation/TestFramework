@@ -16,17 +16,18 @@ with open(fwd_caps_path, 'r', encoding='utf-8') as file:
 def get_desired_caps_data(caps):
     data = caps_data[caps]
     desired_caps = {}
-    for item in data.items():
-        desired_caps.update(item)
+    for (key, value) in data.items():
+        desired_caps[key] = value
+
     desired_caps.pop('ip')
     desired_caps.pop('port')
-    if data['platformName'] == "android":
+    
+    if data['platformName'].lower() == "android":
         desired_caps.update({
             "platformVersion": get_android_devices_version(),
-            "deviceName": get_device_name(),
             "deviceId": get_android_devices_id()
             })
-    elif data['platformName'] == "ios":
+    elif data['platformName'].lower() == "ios":
         desired_caps.update({
         "platformVersion": get_device_version(),
         "deviceName": get_device_name(),
@@ -37,7 +38,7 @@ def get_desired_caps_data(caps):
 def appium_desired(caps):
 
     data = caps_data[caps]
-    desired_caps = get_desired_caps_data(caps)    
+    desired_caps = get_desired_caps_data(caps)
     print(desired_caps)
 
     logging.info("Start APP.")
