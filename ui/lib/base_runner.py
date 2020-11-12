@@ -57,7 +57,7 @@ class BaseWebTestCase(unittest.TestCase):
             cls.driver.quit()
 
     def setUp(self):
-        logging.info("-----Test Start-----")        
+        logging.info("-----Test Start-----")
 
     def tearDown(self):
         logging.info("-----Test End-----")
