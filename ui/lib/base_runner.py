@@ -1,6 +1,7 @@
 # coding=utf-8
 
 import os
+import time
 import unittest
 import warnings
 import logging
@@ -10,7 +11,7 @@ from common.lib.base_config import UI_OUTPUT_DIR
 class BaseAppTestCase(unittest.TestCase):
     driver = None
     output_dir = UI_OUTPUT_DIR
-    screenshot_dir = os.path.join(UI_OUTPUT_DIR, 'img')
+    screenshot_dir = os.path.join(UI_OUTPUT_DIR, 'img', '{}'.format(time.strftime('%Y%m%d')))
 
     @classmethod
     def setUpClass(cls):
@@ -31,15 +32,17 @@ class BaseAppTestCase(unittest.TestCase):
         pass
 
     def save_img(self, img_name):
-        img_path = os.path.join(UI_OUTPUT_DIR, 'img')
         if self.driver is not None:
-            self.driver.get_screenshot_as_file('{}/{}.png'.format(img_path, img_name))
+            img_path = os.path.join(self.screenshot_dir, '{}.png'.format(img_name))
+            if os.path.exists(img_path):
+                os.remove(img_path)
+            self.driver.get_screenshot_as_file(img_path)
 
 
 class BaseWebTestCase(unittest.TestCase):
     driver = None
     output_dir = UI_OUTPUT_DIR
-    screenshot_dir = os.path.join(UI_OUTPUT_DIR, 'img')
+    screenshot_dir = os.path.join(UI_OUTPUT_DIR, 'img', '{}'.format(time.strftime('%Y%m%d')))
 
     @classmethod
     def setUpClass(cls):
@@ -60,6 +63,8 @@ class BaseWebTestCase(unittest.TestCase):
         logging.info("-----Test End-----")
 
     def save_img(self, img_name):
-        img_path = os.path.join(UI_OUTPUT_DIR, 'img')
         if self.driver is not None:
-            self.driver.get_screenshot_as_file('{}/{}.png'.format(img_path, img_name))
+            img_path = os.path.join(self.screenshot_dir, '{}.png'.format(img_name))
+            if os.path.exists(img_path):
+                os.remove(img_path)
+            self.driver.get_screenshot_as_file(img_path)

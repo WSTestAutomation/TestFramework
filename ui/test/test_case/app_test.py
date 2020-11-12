@@ -16,7 +16,9 @@ class app_test(BaseAppTestCase):
     def setUpClass(cls):
         cls.driver = appium_desired("android_baidumap")
 
-    @BeautifulReport.add_test_img(BaseAppTestCase.output_dir, 'app_test_test_1{}'.format(time.strftime('%Y%m%d%H%M%S')))
+    # 有异常发生时会自动截图并呈现在报告中，
+    # 其他需要呈现在报告里的截图，必须手动添加截图名称。
+    @BeautifulReport.add_test_img()
     def test_1_search_location(self):
         baidumap = Demo_BaiduMap(self.driver)
 
@@ -30,7 +32,7 @@ class app_test(BaseAppTestCase):
 
 
     @unittest.skip
-    @BeautifulReport.add_test_img(BaseAppTestCase.output_dir, 'app_test_test_2{}'.format(time.strftime('%Y%m%d%H%M%S')))
+    @BeautifulReport.add_test_img()
     def test_2_get_road(self):
         pass
 
