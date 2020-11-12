@@ -15,13 +15,10 @@ from functools import wraps
 
 __all__ = ['BeautifulReport']
 
-HTML_IMG_TEMPLATE = """
-    <a href="data:image/png;base64, {}">
-    <img src="data:image/png;base64, {}" width="800px" height="500px"/>
-    </a>
-    <br></br>
-"""
-
+HTML_IMG_TEMPLATE = '\
+<a href="data:image/png;base64, {}"> \
+<img src="data:image/png;base64, {}" width="800px" height="500px"/> \
+</a> '
 
 class OutputRedirector(object):
     """ Wrapper to redirect stdout or stderr """
@@ -61,7 +58,7 @@ FIELDS = {
 class PATH:
     """ all file PATH meta """
     # config_tmp_path = SITE_PAKAGE_PATH + '/BeautifulReport/template/template'
-    config_tmp_path = os.path.dirname(__file__) + '/template/template'
+    config_tmp_path = os.path.dirname(__file__) + '/template/template'    
 
 
 class MakeResultJson:
@@ -410,45 +407,62 @@ class BeautifulReport(ReportTestResult, PATH):
             data = file.read()
         return base64.b64encode(data).decode()
 
-    def add_test_img(self, img_dir, *pargs):
-        """
-            接受若干个图片元素, 并展示在测试报告中
-        :param pargs:
-        :return:
-        """
-
+    def add_test_img(*pargs):
+        
         def _wrap(func):
             @wraps(func)
             def __wrap(*args, **kwargs):
+                
+                img_dir = args[0].screenshot_dir
+
+                """
+                打印所有已生成的截图
+                """
+                def attach_screenshots():
+                    for parg in pargs:
+                        img_path = os.path.join(img_dir, parg + '.png')
+                        if os.path.exists(img_path):
+                            print(parg + ':')
+                            data = BeautifulReport.img2base(img_dir, parg + '.png')
+                            print(HTML_IMG_TEMPLATE.format(data, data))
+
+
+                # 创建截图文件夹，例如可以根据日期创建的新的子文件夹
+                if not os.path.exists(img_dir):
+                    os.makedirs(img_dir)
+                result = None
+                is_error_happen = False
                 try:
                     result = func(*args, **kwargs)
-                except Exception:
+                except Exception as ex:
+                    is_error_happen = True
                     if 'save_img' in dir(args[0]):
+                        # 生成错误截图
                         save_img = getattr(args[0], 'save_img')
-                        # save_img(func.__name__)
-                        save_img(pargs[0])
-                        data = BeautifulReport.img2base(img_dir, pargs[0] + '.png')
-                        print(HTML_IMG_TEMPLATE.format(data, data))
-                    sys.exit(0)
-                print('<br></br>')
+                        error_screenshot = '{}-{}-error-{}'.format(func.__module__, func.__name__, time.strftime('%Y%m%d%H%M%S'))
+                        save_img(error_screenshot)
+                        #print('出现错误"{}"，退出用例执行。'.format(ex))
+                        img_path = os.path.join(img_dir, error_screenshot + '.png')
+                        print(error_screenshot + ':')
+                        if os.path.exists(img_path):                            
+                            data = BeautifulReport.img2base(img_dir, error_screenshot + '.png')
+                            print(HTML_IMG_TEMPLATE.format(data, data))
+                        else:
+                            print('  截图未生成，这可能是因为driver值为None')
+                        # 附上报错之前生成的截图
+                        attach_screenshots()
+                        # 结束当前用例转去teardown
+                        raise
 
-                if len(pargs) > 1:
-                    for parg in pargs:
-                        print(parg + ':')
-                        data = BeautifulReport.img2base(img_dir, parg + '.png')
-                        print(HTML_IMG_TEMPLATE.format(data, data))
-                    return result
-                if not os.path.exists(os.path.join(img_dir, '{}.png'.format(pargs[0]))):
-                    return result
-                data = BeautifulReport.img2base(img_dir, pargs[0] + '.png')
-                print(HTML_IMG_TEMPLATE.format(data, data))
+                if not(is_error_happen):
+                    attach_screenshots()
                 return result
 
             return __wrap
 
         return _wrap
 
-    def depend_on(self, *pargs):
+    def depend_on(*pargs):
         def wrap(function):
             @wraps(function)
             def _wrap(self):
