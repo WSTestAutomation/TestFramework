@@ -1,15 +1,17 @@
 # coding=utf-8
 
-from baseview.web.business_web import BusinessWebPage
-from page.web.business.common.login_page import LoginPage as Page
-from utilstest.base_yaml import Yaml
-from common.browser_engine import Logger, open_browser
+import time
+from ui.view.baseview.web.business_web import BusinessWebPage
+from ui.view.page.web.business.common.login_page import LoginPage as Page
+from common.lib.base_yaml import Yaml
+from ui.lib.browser_engine import Logger, web_config_path
+from ui.lib.browser_engine import open_browser
 
-data = Yaml(Yaml.web_config_path).read()
-env = data['env']
-browser = data['browser']
-username = data['user']['test1']
-password = data['pwd']['commonpwd']
+DATA = Yaml(web_config_path).read()
+ENV = DATA['env']
+BROWSER = DATA['browser']
+USERNAME = DATA['user']['test1']
+PASSWORD = DATA['pwd']['commonpwd']
 
 class LoginBusiness(BusinessWebPage):
 
