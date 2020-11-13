@@ -48,9 +48,10 @@ def get_android_devices_version():
     result = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE,
                               stderr=subprocess.PIPE).stdout.readlines()
     for item in result:
-        t = item.decode().split("\t")
-        if len(t) >= 2:
-            return t[0]
+        # t = item.decode().split("\t")
+        # if len(t) >= 2:
+        #     return t[0]
+        return item.decode().strip()
 
 if __name__ == '__main__':
     # result = subprocess.Popen("adb devices", shell=True, stdout=subprocess.PIPE,
