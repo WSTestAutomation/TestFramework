@@ -462,7 +462,7 @@ class BeautifulReport(ReportTestResult, PATH):
 
         return _wrap
 
-    def depend_on(self, *pargs):
+    def depend_on(*pargs):
         def wrap(function):
             @wraps(function)
             def _wrap(self):
