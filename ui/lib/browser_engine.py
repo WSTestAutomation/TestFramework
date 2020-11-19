@@ -46,6 +46,8 @@ def open_browser(env, browser='chrome'):
     # 获取web配置
     with open(web_config_path, 'r', encoding='utf-8') as file:
         data = yaml.load(file, Loader=yaml.FullLoader)
+
+    # 以下是一个示例，基于config/web_config.yaml文件做的配置
     if env == "msit":
         url = data["portal"]['msit']
         Logger.info("Open Url: %s", url)
