@@ -1,36 +1,22 @@
 # coding=utf-8
 
 import re
-import datetime
 import smtplib
 import logging
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
+import datetime
 from socket import gaierror, error
+from email.mime.text import MIMEText
+from common.lib.base_yaml import Yaml
+from email.mime.multipart import MIMEMultipart
+from common.lib.base_config import COMMON_CONFIG_DIR
 
 
 class Email:
-    def __init__(self, receiver, path=None):
-        """初始化Email
-        :param title: 邮件标题，必填。
-        :param message: 邮件正文，非必填。
-        :param path: 附件路径，可传入list（多附件）或str（单个附件），非必填。
-        :param server: smtp服务器，必填。
-        :param sender: 发件人，必填。
-        :param password: 发件人密码，必填。
-        :param receiver: 收件人，多收件人用“；”隔开，必填。
-        """
-
-        self.title = "{} Automation Report".format(datetime.datetime.now().strftime('%Y-%m-%d-%H'))
-        self.message = "This is an automation run result report email.Please do not reply."
+    def __init__(self, path=None):
         self.files = path
-
         self.msg = MIMEMultipart('related')
-
-        self.server = '10.22.18.27'
-        self.sender = 'autotest@juntianbroker.com'
-        self.receiver = receiver
-        self.password = 'Jt123456'
+        self.mail_config_path = os.path.join(
+            COMMON_CONFIG_DIR, 'mail_config.yaml')
 
     def _attach_file(self, att_file):
         att = MIMEText(open('%s' % att_file, 'rb').read(), 'plain', 'utf-8')
@@ -39,15 +25,37 @@ class Email:
         att["Content-Disposition"] = 'attachment; filename="%s"' % file_name[-1]
         self.msg.attach(att)
 
-    def send(self):
+    def send(self, yaml_setting_name='ui'):
+        """mail_config.yaml 中需要填入的参数：
+        :param subject: 邮件标题，必填。
+        :param message: 邮件正文, 必填。
+        :param sender: 发件人，必填。
+        :param to: 收件人，必填。多收件人用“ ; ”隔开。
+        :param cc: 抄送，非必填。多收件人用“ , ”隔开。
+        :param server: smtp服务器，默认为：mail.wicresoft.com。
+        :param user: 登录邮箱服务器用户名，发送给外部邮箱时必填。
+        :param password: 登录邮箱服务器密码，发送给外部邮箱时必填。
+        """
+        mail_settings = Yaml(self.mail_config_path).read_get(yaml_setting_name)
 
-        self.msg['Subject'] = self.title
-        self.msg['From'] = self.sender
-        self.msg['To'] = self.receiver
+        server = mail_settings['server']
+        user = mail_settings['user']
+        password = mail_settings['password']
+        subject = "{} {}".format(
+            mail_settings['subject'], datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+        sender = mail_settings['sender']
+        to = mail_settings['to']
+        cc = mail_settings['cc']
+        message = mail_settings['message']
+
+        self.msg['Subject'] = subject
+        self.msg['From'] = sender
+        self.msg['To'] = to
+        self.msg['Cc'] = cc
 
     # 邮件正文
-        if self.message:
-            self.msg.attach(MIMEText(self.message, 'plain'))
+        if message:
+            self.msg.attach(MIMEText(message, 'plain'))
 
         # 添加附件，支持多个附件（传入list），或者单个附件（传入str）
         if self.files:
@@ -59,25 +67,30 @@ class Email:
 
         # 连接服务器并发送
         try:
-            smtp_server = smtplib.SMTP(self.server)  # 连接sever
-            smtp_server.connect(self.server, 25)
+            smtp_server = smtplib.SMTP(server)  # 连接sever
+            smtp_server.connect(server, 25)
         except (gaierror and error) as e:
-            logging.exception('发送邮件失败,无法连接到SMTP服务器，检查网络以及SMTP服务器. %s', e)            
+            logging.exception('发送邮件失败,无法连接到SMTP服务器，检查网络以及SMTP服务器. %s', e)
         else:
             try:
-                smtp_server.starttls()
-                smtp_server.login('autotest', self.password)  # 登录
+                if password:
+                    smtp_server.starttls()
+                    smtp_server.login(user, password)
+                else:
+                    logging.info(' 登录邮箱服务器的密码为空，跳过登录。')
             except smtplib.SMTPAuthenticationError as e:
                 logging.exception('用户名密码验证失败！%s', e)
             else:
-                smtp_server.sendmail(self.sender, self.receiver.split(';'), self.msg.as_string())  # 发送邮件
+                to_addrs = to.split(";") + cc.split(",")
+                smtp_server.sendmail(sender, to_addrs, self.msg.as_string())  # 发送邮件
             finally:
-                smtp_server.quit()  # 断开连接
-                logging.info('发送邮件"{0}"成功! 收件人：{1}。如果没有收到邮件，请检查垃圾箱,同时检查收件人地址是否正确'.format(self.title, self.receiver))
+                smtp_server.quit()
+                logging.info(
+                    '发送邮件"{0}"成功! 收件人：{1}。如果没有收到邮件，请检查垃圾箱,同时检查收件人地址是否正确'.format(subject, to))
 
 
 if __name__ == '__main__':
     """
-    report = os.path.join(REPORT_PATH, 'autotest_report_20191115001116.html')
-    Email(receiver='shiquanzh@wicresoft.com', path=report).send()
+    report = os.path.join(REPORT_PATH, 'autotest_report_20201112174407.html')
+    Email(path=report).send()
     """
