@@ -1,0 +1,7 @@
+common:
+  url1: https://msit.microsoftstream.com/health
+  url2: https://web-srol-1.stream.azure-test.net/health
+  url3: https://web-srol-2.stream.azure-test.net/health
+  url4: https://web-refe-1.stream.azure-test.net/health
+username: ''
+password: ''

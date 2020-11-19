@@ -2,7 +2,7 @@
 This is a test automation project for Stream Web & mobile App.
 
 # Dependencies
-Install chrome browser  
+Install chrome, Edge or Firefox
 Install [VS Code](https://code.visualstudio.com/download)  
 Install [git](https://git-scm.com/downloads) version control tool  
 Download the Python installer [here](https://www.python.org/downloads/) and then install Python. Don't forget to check the "Add Python to PATH" box.  
@@ -15,6 +15,6 @@ Those tools are best installed using pip, Python's module installer. The Python 
 `pip install -r requirements.txt`
 
 # Example
-Modify /config/web_config.yaml  
-Switch to English input method  
-Execute /test_run/run_test_case.py
+Modify configuration files under ui\config
+Switch to English input method
+Execute ui\test\test_run\run_test_case.py
