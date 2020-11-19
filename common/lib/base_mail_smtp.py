@@ -1,5 +1,5 @@
 # coding=utf-8
-
+import os
 import re
 import smtplib
 import logging
@@ -25,8 +25,9 @@ class Email:
         att["Content-Disposition"] = 'attachment; filename="%s"' % file_name[-1]
         self.msg.attach(att)
 
-    def send(self, yaml_setting_name='ui'):
+    def send(self, yaml_setting_name='smtp_default'):
         """mail_config.yaml 中需要填入的参数：
+        :param yaml_setting_name: yaml块中首行的key值，默认为smtp_default。
         :param subject: 邮件标题，必填。
         :param message: 邮件正文, 必填。
         :param sender: 发件人，必填。

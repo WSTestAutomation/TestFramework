@@ -1,4 +1,4 @@
-ui:
+smtp_default:
   server: mail.wicresoft.com
   user: 
   password: 
