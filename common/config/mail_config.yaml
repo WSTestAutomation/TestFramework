@@ -1,0 +1,25 @@
+smtp_default:
+  server: mail.wicresoft.com
+  user: 
+  password: 
+  subject: "[OMG-Stream] Automation Test Run Result"
+  sender: 
+  to: 
+  cc: 
+  message: "This is an Automation Test Run Result report.
+
+            Please do not reply."
+
+default:
+  sender: xxx@microsoft.com
+  password: XXXXX
+  subject: 'Automation Report'
+  to: wzxu@microsoft.com, yumizh@wicresoft.com
+  cc: wzxu@microsoft.com
+
+ui:
+  sender: xxx@microsoft.com
+  password: XXXXX
+  subject: 'UI Automation Report'
+  to: xxx@microsoft.com, xxx@wicresoft.com
+  cc: xxx@microsoft.com
