@@ -22,30 +22,37 @@ elif sys.platform.__eq__('darwin'):
     chrome_driver_path = os.path.join(UI_DRIVERS_DIR, 'chromedriver')
 
 
-def open_browser(env, browser='chrome'):
+def open_browser(env, browser='chrome', incognito=True):
     driver = None
     if browser == "chrome":
         chrome_options = webdriver.ChromeOptions()
-        chrome_options.add_argument('--incognito')
+        if incognito:
+            chrome_options.add_argument('--incognito')
         driver = webdriver.Chrome(executable_path=chrome_driver_path, chrome_options=chrome_options)
-    if browser == "msedge":
+    elif browser == "msedge":
         edge_options = EdgeOptions()
         edge_options.use_chromium = True
-        edge_options.add_argument('-inprivate')
+        if incognito:
+            edge_options.add_argument('-inprivate')
         driver = Edge(executable_path=msedge_driver_path, options=edge_options)
-    if browser == "firefox":
+    elif browser == "firefox":
         firefox_options = webdriver.FirefoxOptions()
-        firefox_options.add_argument('--incognito')
+        if incognito:
+            firefox_options.add_argument('--incognito')
         driver = webdriver.Firefox(executable_path=firefox_driver_path, options=firefox_options)
     elif browser == "ie":
         driver = webdriver.Ie(executable_path=ie_driver_path)
         # selenium grid
         # driver = webdriver.Remote(command_executor='http://10.22.40.234:5555/wd/hub',
         #                           desired_capabilities=DesiredCapabilities.INTERNETEXPLORER)
+    elif browser == "safari":
+        driver = webdriver.Safari()
 
     # 获取web配置
     with open(web_config_path, 'r', encoding='utf-8') as file:
         data = yaml.load(file, Loader=yaml.FullLoader)
+
+    # 以下是一个示例，基于config/web_config.yaml文件做的配置
     if env == "msit":
         url = data["portal"]['msit']
         Logger.info("Open Url: %s", url)
