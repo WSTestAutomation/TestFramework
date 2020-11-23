@@ -7,7 +7,7 @@ import unittest
 from ui.view.businessview.web.common.login_business import simple_login
 from ui.view.businessview.web.common.stream_topbar_business import *
 from ui.view.businessview.web.common.stream_browse_business import *
-from ui.view.businessview.web.single_video.stream_video_business import *
+from ui.view.businessview.web.common.stream_video_business import *
 from ui.lib.base_runner import BaseWebTestCase
 from common.lib.base_yaml import Yaml
 from ui.lib.browser_engine import Logger, web_config_path
