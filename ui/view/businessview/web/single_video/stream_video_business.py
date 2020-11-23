@@ -4,7 +4,7 @@
 # @File    : stream_video_business.py
 
 from ui.view.baseview.web.business_web import BusinessWebPage
-from ui.view.page.web.business.common.video_page import VideoPage as Page
+from ui.view.page.web.business.single_video.video_page import VideoPage as Page
 from ui.lib.browser_engine import Logger
 
 class Stream_video_business(BusinessWebPage):
