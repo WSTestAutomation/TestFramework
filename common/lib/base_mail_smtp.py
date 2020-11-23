@@ -84,10 +84,10 @@ class Email:
             else:
                 to_addrs = to.split(";") + cc.split(",")
                 smtp_server.sendmail(sender, to_addrs, self.msg.as_string())  # 发送邮件
-            finally:
-                smtp_server.quit()
                 logging.info(
                     '发送邮件"{0}"成功! 收件人：{1}。如果没有收到邮件，请检查垃圾箱,同时检查收件人地址是否正确'.format(subject, to))
+            finally:
+                smtp_server.quit()
 
 
 if __name__ == '__main__':

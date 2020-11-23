@@ -11,10 +11,10 @@ def email(report_path, attachment, setting_name='default'):
     def get_receiver(mailbox_list):
         list_receiver = []
         for mailbox in mailbox_list.split(','):
-            list_receiver.append(Mailbox(email_address=mailbox.trim()))
+            list_receiver.append(Mailbox(email_address=mailbox.strip(' ')))
         return list_receiver
 
-    config_file_path = os.path.join(COMMON_CONFIG_DIR, 'report_mail.yaml')
+    config_file_path = os.path.join(COMMON_CONFIG_DIR, 'mail_config.yaml')
     settings = Yaml(config_file_path).read_get(setting_name)
 
     sender = settings['sender']
