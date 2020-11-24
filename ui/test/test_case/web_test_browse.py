@@ -1,7 +1,5 @@
 # coding=utf-8
 
-import sys
-import os
 import time
 import unittest
 from ui.view.businessview.web.common.login_business import simple_login
