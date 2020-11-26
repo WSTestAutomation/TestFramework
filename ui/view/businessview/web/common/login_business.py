@@ -1,17 +1,13 @@
 # coding=utf-8
 
-import time
 from ui.view.baseview.web.business_web import BusinessWebPage
 from ui.view.page.web.business.common.login_page import LoginPage as Page
-from common.lib.base_yaml import Yaml
-from ui.lib.browser_engine import Logger, web_config_path
-from ui.lib.browser_engine import open_browser
+from ui.lib.browser_engine import Logger, web_config, open_browser
 
-DATA = Yaml(web_config_path).read()
-ENV = DATA['env']
-BROWSER = DATA['browser']
-USERNAME = DATA['user']['test1']
-PASSWORD = DATA['pwd']['commonpwd']
+ENV = web_config['env']
+BROWSER = web_config['browser']
+USERNAME = web_config['user']['test1']
+PASSWORD = web_config['pwd']['commonpwd']
 
 class LoginBusiness(BusinessWebPage):
 
@@ -29,14 +25,13 @@ class LoginBusiness(BusinessWebPage):
             self.send_keys(self._page.user_name_input, user)
             self.click(self._page.next_input)
             # TODO: there is a popup window here and possible we need to input credentials in a differet way...
-            time.sleep(3)
             self.send_keys(self._page.password_input, pwd)
             self.click(self._page.signin_input)
             if self.driver.current_url.startswith('https://login.windows-ppe.net/common/login'):
                 self.click(self._page.no_button)
 
             # Now it should be in Homepage!
-            if user in self.driver.page_source:
+            if user.lower() in self.driver.page_source.lower():
                 Logger.info('%s is signed in.', user)
                 is_sucess = True
             else:
