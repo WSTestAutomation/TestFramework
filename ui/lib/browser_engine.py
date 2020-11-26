@@ -11,7 +11,10 @@ from selenium.webdriver import DesiredCapabilities
 
 ui_log_dir = os.path.join(UI_OUTPUT_DIR, 'logs')
 Logger = Log(ui_log_dir).get_logger() # 初始化日志模块
+# 获取web配置
 web_config_path = os.path.join(UI_CONFIG_DIR, 'web_config.yaml')
+with open(web_config_path, 'r', encoding='utf-8') as file:
+    web_config = yaml.load(file, Loader=yaml.FullLoader)
 
 if sys.platform.__eq__('win32'):
     chrome_driver_path = os.path.join(UI_DRIVERS_DIR, 'chromedriver.exe')
@@ -48,35 +51,31 @@ def open_browser(env, browser='chrome', incognito=True):
     elif browser == "safari":
         driver = webdriver.Safari()
 
-    # 获取web配置
-    with open(web_config_path, 'r', encoding='utf-8') as file:
-        data = yaml.load(file, Loader=yaml.FullLoader)
-
     # 以下是一个示例，基于config/web_config.yaml文件做的配置
     if env == "msit":
-        url = data["portal"]['msit']
+        url = web_config["portal"]['msit']
         Logger.info("Open Url: %s", url)
         driver.get(url)
     if env == "srol1":
-        url = data["portal"]['srol1']
+        url = web_config["portal"]['srol1']
         Logger.info("Open Url: %s", url)
         driver.get(url)
     if env == "srol2":
-        url = data["portal"]['srol2']
+        url = web_config["portal"]['srol2']
         Logger.info("Open Url: %s", url)
         driver.get(url)
     if env == "ppe":
-        url = data["portal"]['ppe']
+        url = web_config["portal"]['ppe']
         Logger.info("Open Url: %s", url)
         driver.get(url)
     if env == "refe":
-        url = data["portal"]['refe']
+        url = web_config["portal"]['refe']
         Logger.info("Open Url: %s", url)
         driver.get(url)
     elif env == '':
         driver = None
     driver.maximize_window()
-    driver.implicitly_wait(data['implicitly_wait'])
+    driver.implicitly_wait(web_config['implicitly_wait'])
     return driver
 
 
