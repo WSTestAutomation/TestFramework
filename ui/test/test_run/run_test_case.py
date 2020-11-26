@@ -23,5 +23,5 @@ result.report(filename=report_file,
               description='UI Automation Report', log_path=report_path)
 
 #report_file_path = os.path.join(report_path, report_file)
-#Email(receiver='', path=report_file_path).send()
+#Email(path=report_file_path).send()
 email(report_path, report_file)
