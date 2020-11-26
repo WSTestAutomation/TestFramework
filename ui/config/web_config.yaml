@@ -17,4 +17,4 @@ user:
   personalAccount: XXX@microsoft.com
 pwd:
   commonpwd: xxx
-implicitly_wait: 60
+implicitly_wait: 10
