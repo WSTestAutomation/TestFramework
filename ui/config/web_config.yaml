@@ -16,5 +16,5 @@ user:
   streamadmin: streamadmin@media.ccsctp.net
   personalAccount: XXX@microsoft.com
 pwd:
-  commonpwd: xxx
-implicitly_wait: 60
+  commonpwd: P@$$w0rd2
+implicitly_wait: 10

@@ -27,10 +27,10 @@ class web_test(BaseWebTestCase):
         # TODO: add test steps and asserts.
         # 如果没有报错也需要截图，可以调用self.save_img() 方法
         self.save_img('web_test-test_1-screenshot1')
-        #stream_topbar_business.goto_feature_page(FeaturePage.mycontent_videos)
-        #self.assertTrue(self.driver.current_url.endswith('/studio/videos'))
-        #stream_topbar_business.goto_feature_page(FeaturePage.mycontent_channels)
-        #self.assertTrue(self.driver.current_url.endswith('/studio/channels'))
+        # stream_topbar_business.goto_feature_page(FeaturePage.mycontent_videos)
+        # self.assertTrue(self.driver.current_url.endswith('/studio/videos'))
+        # stream_topbar_business.goto_feature_page(FeaturePage.mycontent_channels)
+        # self.assertTrue(self.driver.current_url.endswith('/studio/channels'))
 
 if __name__ == '__main__':
     unittest.main()
