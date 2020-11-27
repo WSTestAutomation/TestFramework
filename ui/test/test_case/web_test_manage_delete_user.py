@@ -19,25 +19,19 @@ class web_test_manage_delete_user(BaseWebTestCase):
         self.env = self.data['env']
         self.homeUrl = self.data['portal'][self.env].rstrip("/")
 
-    @BeautifulReport.add_test_img('test_manage_deleted_users-test_1-screenshot1')
+    # @BeautifulReport.add_test_img('test_manage_deleted_users-test_1-screenshot1')
     def test_admin_page(self):
         self.driver = simple_login()
-        self._testMethodDoc = "Validate admin navigation"
         manage_del_user = Manage_deleted_users_business(self.driver)
 
-        manage_del_user.click_settings()
-
         manage_del_user.click_admin_link()
+        manage_del_user.admin_settings_page()
+        manage_del_user.search('test')
 
     
-        # if self.assertTrue(self.driver.current_url.endswith('/admin?view=Administrators')):
-        #     time.sleep(5)
-        manage_del_user.admin_settings_page()
+      
+        # self.save_img("test_manage_deleted_users-test_1-screenshot1")
         
-            
-
-        self.save_img("test_manage_deleted_users-test_1-screenshot1")
-        
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
+    

@@ -12,8 +12,6 @@ class Manage_deleted_users_business(BusinessWebPage):
     def __init__(self, driver):
         BusinessWebPage.__init__(self=self, driver=driver)
         self._page = Page()
-        self.admin_link = self._page.adminsettings_link
-        self.settings_button = self._page.setting_button
 
     # 获取元素点击按钮
     def settings_element(self, sname):
@@ -22,23 +20,24 @@ class Manage_deleted_users_business(BusinessWebPage):
         else:
             element = self.find_element(*sname)
             self.perform_javascript_click(element)
-
-    # 点击settings按钮
-    def click_settings(self):
-        self.settings_element(self.settings_button)
-
+ 
     # 点击admin_settings按钮
     def click_admin_link(self):
-        self.settings_element(self.admin_link)
-        
+        self.settings_element(self._page.setting_button)
+        self.settings_element(self._page.adminsettings_link)
     
     # 进入admin_settings页面
     def admin_settings_page(self):
-
-        # 切换为admin_settings页面操作
-        # current_handle = self.switch_to_window_by_index(-1)
-            # 获取manage_deleted_users并且点击
         self.settings_element(self._page.manage_deleted_users)
+        
+    def search(self, text):
+        self.send_keys(self._page.search_delete_users, text)
+        self.click(self._page.search_button)
+        
+
+
+
+
 
 
         
