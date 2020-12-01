@@ -29,6 +29,8 @@ class web_test_navigation(BaseWebTestCase):
             print("尝试点击按钮：", key, value)
             try:
                 navigation_business.click_navigation_button(navigation_business.managestream_menu_dict[key])
+                navigation_business.tabpage_is_element_present(navigation_business.tabpage_dict[key])
+                print("进入"+key+"界面")
             except Exception as ex:
                 print("Failed！！！,",format(ex))
         print("尝试点击按钮：Manage Stream")
@@ -43,6 +45,8 @@ class web_test_navigation(BaseWebTestCase):
             print("尝试点击按钮：", key, value)
             try:
                 navigation_business.click_navigation_button(navigation_business.streammigration_menu_dict[key])
+                navigation_business.tabpage_is_element_present(navigation_business.tabpage_dict[key])
+                print("进入"+key+"界面")
             except Exception as ex:
                 print("Failed！！！,",format(ex))
         print("尝试点击按钮：Stream Migration")
@@ -57,6 +61,8 @@ class web_test_navigation(BaseWebTestCase):
             print("尝试点击按钮：", key, value)
             try:
                 navigation_business.click_navigation_button(navigation_business.dataprivacy_menu_dict[key])
+                navigation_business.tabpage_is_element_present(navigation_business.tabpage_dict[key])
+                print("进入"+key+"界面")
             except Exception as ex:
                 print("Failed！！！,",format(ex))
         print("尝试点击按钮：Data Privacy")
@@ -69,7 +75,7 @@ class web_test_navigation(BaseWebTestCase):
         #Admin settings标签
         print("确认Admin settings标签是否存在")
         try:
-            navigation_business.adminsettings_is_element_clickable()
+            navigation_business.adminsettings_is_element_present()
             print("Admin settings标签存在")
         except Exception as ex:
             print("Admin settings标签不存在",format(ex))
