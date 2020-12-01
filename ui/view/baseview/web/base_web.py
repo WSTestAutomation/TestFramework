@@ -158,6 +158,10 @@ class BaseWebPage(object):
         elif types == "右击":
             logging.info('右击 %s', element)
             ActionChains(self.driver).context_click(element).perform()
+        elif types == "单击":
+            logging.info('单击 %s', element)
+            ActionChains(self.driver).click(element).perform()
+        
 
     # 点击坐标
     def action_coordinates(self, xoffset, yoffset):

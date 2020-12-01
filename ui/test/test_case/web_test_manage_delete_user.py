@@ -22,14 +22,24 @@ class web_test_manage_delete_user(BaseWebTestCase):
     # @BeautifulReport.add_test_img('test_manage_deleted_users-test_1-screenshot1')
     def test_admin_page(self):
         self.driver = simple_login()
+
         manage_del_user = Manage_deleted_users_business(self.driver)
 
         manage_del_user.click_admin_link()
+
+        # 获取页面标题
+        title = self.driver.title
+
+        self.assertEqual(title, "Admin settings | Microsoft Stream", "当前在admin settings页面")
+
         manage_del_user.admin_settings_page()
+        
         manage_del_user.search('test')
 
-    
-      
+        manage_del_user.icon_edit()
+        manage_del_user.edit_user_details("test video")
+        
+        
         # self.save_img("test_manage_deleted_users-test_1-screenshot1")
         
 if __name__ == "__main__":

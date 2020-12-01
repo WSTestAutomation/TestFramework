@@ -29,10 +29,26 @@ class Manage_deleted_users_business(BusinessWebPage):
     # 进入admin_settings页面
     def admin_settings_page(self):
         self.settings_element(self._page.manage_deleted_users)
-        
+
+    # 搜索
     def search(self, text):
         self.send_keys(self._page.search_delete_users, text)
         self.click(self._page.search_button)
+
+    # 单击edit按钮进入编辑
+    def icon_edit(self):
+        edit_button = self.find_element(*self._page.edit_button)
+        self.action_catena(edit_button, "单击")
+
+    # 编辑保存name输入框内容
+    def edit_user_details(self, text):
+        self.send_keys(self._page.edit_name, text)
+        self.click(self._page.save_button)
+
+        
+
+
+        
         
 
 
