@@ -10,10 +10,11 @@ class ManageDeletedUserPage:
 
     edit_button = (By.XPATH, '//button[@class="edit c-action-trigger"]//*[name()="svg"]/*[name()="use"]')
     delete_button = (By.XPATH, '//button[@class="delete c-action-trigger"]//*[name()="svg"]/*[name()="use"]')
-
+    cancel_delete_button = (By.XPATH, '//button[@class="stream-btn dialog-cancel-button ng-binding ng-scope"]')
+    # Edit user details
     edit_name = (By.XPATH, '//input[starts-with(@class,"ct-textbox-compact")]')
-    save_button = (By.XPATH, '//button[text()=" Save "]')
-    cancel_button = (By.XPATH, '//button[text()=" Cancel "]')
+    save_edit_button = (By.XPATH, '//button[@class="stream-btn right-dialog-button ng-binding btn-primary"]')
+    cancel_edit_button = (By.XPATH, '//button[@class="stream-btn left-dialog-button ng-binding"]')
 
 
 
