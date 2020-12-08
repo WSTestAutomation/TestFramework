@@ -11,6 +11,7 @@ from ui.view.businessview.web.admin.navigation_business import *
 class Admin_navigation(BaseWebTestCase):
     def __init__(self, *args, **kwargs):
         BaseWebTestCase.__init__(self, *args, **kwargs)
+        self.navigation_business = None
 
     @classmethod
     def setUpClass(cls):
@@ -18,29 +19,33 @@ class Admin_navigation(BaseWebTestCase):
         cls.driver = simple_login()
         cls.data = Yaml(web_config_path).read()
         cls.env = cls.data['env']
-        url = cls.data['portal'][cls.env] + '/admin'
-        cls.driver.get(url)
 
-    def test_admin_navigation(self):
+    def test_1(self):
+        """
+        验证登录
+        """
+        url = self.data['portal'][self.env] + '/admin'
+        self.driver.get(url)
+        self.navigation_business = Navigation_business(self.driver)
+        self.assertTrue(self.navigation_business.is_sign_in_successully(), '页面正常展示')
 
-        try:
-            self.assertTrue(1==2, "checkpoint1")
-        except AssertionError as e:
-            self._outcome.errors.append((self, str(e)))
-
-        navigation_business = Navigation_business(self.driver)
+    @BeautifulReport.depend_on("test_1")
+    @BeautifulReport.add_test_img('admin_navigation-test_2')
+    def test_2(self):
         """
         验证：
         1. 无法点击的只检查text内容，或跳过
         2. 可以点击且可以展开的，需要检验 展开/闭合的功能
         3. 可以点击且右侧有内容的需要检验右侧
         """
-
+        self.navigation_business = Navigation_business(self.driver)
+        
         ## 循环
-        for name, item in navigation_business.menu.items():
-            with self.subTest(name):
+        for name, item in self.navigation_business.menu.items():
+            with self.subTest(name=name):
                 # 验证1
-                # TODO
+                if item.is_clickable is False:
+                    pass
 
                 # 验证2
                 # 假如可以展开/收起则测，否则跳过
@@ -49,9 +54,7 @@ class Admin_navigation(BaseWebTestCase):
                     self.assertTrue(item.contract(), "确认'"+name+"'收起子项目的功能")
                 #navigation_business.menu['Spotlight videos'].click()
                 # 验证3
-                # TODO
-                self.validate_tab_page(navigation_business.menu, name)
-
+                self.validate_tab_page(self.navigation_business.menu, name)
 
 
     def validate_tab_page(self, dict_menu, item_name):
@@ -68,7 +71,8 @@ class Admin_navigation(BaseWebTestCase):
             # 元素存在， 且为父节点下唯一子元素
             ele_tab_page = item.obj.find_element(*item.tab_by)
             self.assertIsNotNone(ele_tab_page, ('页面'+ item.name + '已显示'))
-            #TODO:
+            elements = self.navigation_business.get_elements_under_tab_page()
+            self.assertEqual(len(elements), 1, "其他功能页面不显示")
 
 
 if __name__ == '__main__':
