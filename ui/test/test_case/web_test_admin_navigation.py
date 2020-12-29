@@ -11,16 +11,17 @@ from ui.view.businessview.web.admin.navigation_business import *
 class Admin_navigation(BaseWebTestCase):
     def __init__(self, *args, **kwargs):
         BaseWebTestCase.__init__(self, *args, **kwargs)
-        self.navigation_business = None
 
     @classmethod
     def setUpClass(cls):
         super(Admin_navigation, cls).setUpClass()
-        cls.driver = simple_login()
         cls.data = Yaml(web_config_path).read()
         cls.env = cls.data['env']
+        cls.user = cls.data['user']['tenantadmin']
+        cls.driver = simple_login(username=cls.user)
+        cls.navigation_business = None
 
-    def test_1(self):
+    def test_admin_navigation_1(self):
         """
         验证登录
         """
@@ -29,9 +30,9 @@ class Admin_navigation(BaseWebTestCase):
         self.navigation_business = Navigation_business(self.driver)
         self.assertTrue(self.navigation_business.is_sign_in_successully(), '页面正常展示')
 
-    @BeautifulReport.depend_on("test_1")
+    @BeautifulReport.depend_on("test_admin_navigation_1")
     @BeautifulReport.add_test_img('admin_navigation-test_2')
-    def test_2(self):
+    def test_admin_navigation_2(self):
         """
         验证：
         1. 无法点击的只检查text内容，或跳过

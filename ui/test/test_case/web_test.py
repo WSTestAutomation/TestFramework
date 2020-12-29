@@ -19,6 +19,7 @@ class web_test(BaseWebTestCase):
     @BeautifulReport.add_test_img('web_test-test_1-screenshot1')
     def test_1(self):
         self._testMethodDoc = "Validate topbar navigation"
+        # 如果类内的其它test case也需要用到driver，那么需要将self.driver的赋值放到setUpClass()内部
         driver = simple_login()
         self.assertIsNotNone(driver, "成功获取driver！")
         self.driver = driver
@@ -26,7 +27,9 @@ class web_test(BaseWebTestCase):
         # 如果没有报错也需要截图，可以调用self.save_img() 方法
         self.save_img('web_test-test_1-screenshot1')
         print('这句话会显示在report中，注意report中截图总是先显示在最下面，而不是呈现在这句话上面')
-
+        #self.driver.close()
+        #self.driver.quit()
+    
 
 if __name__ == '__main__':
     unittest.main()

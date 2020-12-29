@@ -45,11 +45,11 @@ class LoginBusiness(BusinessWebPage):
             return is_sucess
 
 
-def simple_login():
+def simple_login(username=USERNAME, password=PASSWORD):
     Logger.info("Login to %s", ENV)
     driver = open_browser(ENV, BROWSER)
     login_business = LoginBusiness(driver)
-    is_login = login_business.login(user=USERNAME, pwd=PASSWORD)
+    is_login = login_business.login(username, password)
     if is_login:
         return driver
     return None
