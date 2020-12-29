@@ -23,6 +23,9 @@ if sys.platform.__eq__('win32'):
     firefox_driver_path = os.path.join(UI_DRIVERS_DIR, 'firefoxdriver.exe')
 elif sys.platform.__eq__('darwin'):
     chrome_driver_path = os.path.join(UI_DRIVERS_DIR, 'chromedriver')
+elif sys.platform.__eq__('linux'):
+    chrome_driver_path = os.path.join(UI_DRIVERS_DIR, 'chromedriver')
+    firefox_driver_path = os.path.join(UI_DRIVERS_DIR, 'geckodriver')
 
 
 def open_browser(env, browser='chrome', incognito=True):
@@ -31,6 +34,9 @@ def open_browser(env, browser='chrome', incognito=True):
         chrome_options = webdriver.ChromeOptions()
         if incognito:
             chrome_options.add_argument('--incognito')
+        if sys.platform.__eq__('linux'):
+            chrome_options.add_argument('--no-sandbox')
+            chrome_options.add_argument('--headless')
         driver = webdriver.Chrome(executable_path=chrome_driver_path, chrome_options=chrome_options)
     elif browser == "msedge":
         edge_options = EdgeOptions()
@@ -42,6 +48,8 @@ def open_browser(env, browser='chrome', incognito=True):
         firefox_options = webdriver.FirefoxOptions()
         if incognito:
             firefox_options.add_argument('--incognito')
+        if sys.platform.__eq__('linux'):
+            firefox_options.add_argument('--headless')
         driver = webdriver.Firefox(executable_path=firefox_driver_path, options=firefox_options)
     elif browser == "ie":
         driver = webdriver.Ie(executable_path=ie_driver_path)
