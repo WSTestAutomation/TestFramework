@@ -10,8 +10,7 @@ from selenium.webdriver.support.select import Select
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
-from selenium.common.exceptions import NoSuchElementException
-from selenium.common.exceptions import TimeoutException
+from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from ui.lib.browser_engine import Logger, web_config_path, web_config
 
 timeout_webdriverwait = web_config['implicitly_wait']
@@ -39,12 +38,20 @@ class BaseWebPage(object):
 
     def find_element(self, *loc, timeout=timeout_webdriverwait):
         logging.info('通过 %s: %s 查找元素', loc[0], loc[1])
-        element = WebDriverWait(self.driver, timeout).until(EC.presence_of_element_located(locator=loc))
+        try:
+            element = WebDriverWait(self.driver, timeout).until(EC.presence_of_element_located(locator=loc))
+        except TimeoutException:
+            logging.info('元素未找到，原因：超时')
+            element = None
         return element
 
     def find_elements(self, *loc, timeout=timeout_webdriverwait):
         logging.info('通过 %s: %s 查找元素', loc[0], loc[1])
-        elements = WebDriverWait(self.driver, timeout).until(EC.presence_of_all_elements_located(locator=loc))
+        try:
+            elements = WebDriverWait(self.driver, timeout).until(EC.presence_of_all_elements_located(locator=loc))
+        except TimeoutException:
+            logging.info('元素未找到，原因：超时')
+            elements = None
         return elements
 
     def find_element_by_text(self, loc, text):
@@ -133,8 +140,12 @@ class BaseWebPage(object):
     def switch_to_default_content(self):
         self.driver.switch_to.default_content()
 
-    def switch_to_alert(self, timeout = timeout_webdriverwait):
-        alert = WebDriverWait(self.driver, timeout).until(EC.alert_is_present(), message='No alert show')
+    def switch_to_alert(self, timeout=timeout_webdriverwait):
+        try:
+            alert = WebDriverWait(self.driver, timeout).until(EC.alert_is_present(), message='No alert show')
+        except TimeoutException:
+            logging.info('元素未找到，原因：超时')
+            alert = None
         return alert
 
     @staticmethod
