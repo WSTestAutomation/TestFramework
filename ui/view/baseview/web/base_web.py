@@ -163,6 +163,9 @@ class BaseWebPage(object):
         if types == "悬停":
             logging.info('悬停 %s', element)
             ActionChains(self.driver).move_to_element(element).perform()
+        elif types == "单击":
+            logging.info('单击 %s', element)
+            ActionChains(self.driver).click(element).perform()
         elif types == "双击":
             logging.info('双击 %s', element)
             ActionChains(self.driver).double_click(element).perform()
