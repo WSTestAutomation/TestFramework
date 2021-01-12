@@ -33,7 +33,7 @@ class LoginBusiness(BusinessWebPage):
                 self.click(self._page.no_button)
 
             # Now it should be in Homepage!
-            if user in self.driver.page_source:
+            if user.lower() in self.driver.page_source.lower():
                 Logger.info('%s is signed in.', user)
                 is_sucess = True
             else:
