@@ -10,6 +10,7 @@ from appium.webdriver.common.touch_action import TouchAction
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.action_chains import ActionChains
+from selenium.common.exceptions import TimeoutException
 
 
 class BaseAppPage(object):
@@ -20,12 +21,20 @@ class BaseAppPage(object):
 
     def find_element(self, *loc, time_=5):
         logging.info('通过 %s: %s 查找元素', loc[0], loc[1])
-        element = WebDriverWait(self.driver, time_).until(EC.presence_of_element_located(locator=loc))
+        try:
+            element = WebDriverWait(self.driver, time_).until(EC.presence_of_element_located(locator=loc))
+        except TimeoutException:
+            logging.info('元素未找到，原因：超时')
+            element = None
         return element
 
     def find_elements(self, *loc, time_=5):
         logging.info('过 %s: %s 查找元素', loc[0], loc[1])
-        elements = WebDriverWait(self.driver, time_).until(EC.presence_of_all_elements_located(locator=loc))
+        try:
+            elements = WebDriverWait(self.driver, time_).until(EC.presence_of_all_elements_located(locator=loc))
+        except TimeoutException:
+            logging.info('元素未找到，原因：超时')
+            elements = None
         return elements
 
     def get_attribute(self, loc, name):
@@ -114,13 +123,3 @@ class BaseAppPage(object):
         self.driver.execute_script("mobile:dragFromToForDuration", {"duration": duration, "element": None,
                                                                     "fromX": start_x, "fromY": start_y, "toX": end_x,
                                                                     "toY": end_y})
-
-    def _find_element(self, *loc, time_=5):
-        logging.info('通过 %s: %s 查找元素', loc[0], loc[1])
-        element = WebDriverWait(self.driver, time_).until(EC.presence_of_element_located(locator=loc))
-        return element
-
-    def _find_elements(self, *loc, time_=5):
-        logging.info('通过 %s: %s 查找元素', loc[0], loc[1])
-        elements = WebDriverWait(self.driver, time_).until(EC.presence_of_all_elements_located(locator=loc))
-        return elements

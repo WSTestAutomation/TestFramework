@@ -24,4 +24,5 @@ result.report(filename=report_file,
 
 #report_file_path = os.path.join(report_path, report_file)
 #Email(path=report_file_path).send()
-email(report_path, report_file)
+#需要先去配置mail_config.yaml
+#email(report_path, report_file)

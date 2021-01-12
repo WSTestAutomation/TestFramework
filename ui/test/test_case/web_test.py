@@ -21,6 +21,7 @@ class web_test(BaseWebTestCase):
         self._testMethodDoc = "Validate topbar navigation"
         driver = simple_login()
         self.assertIsNotNone(driver, "成功获取driver！")
+        # 如果类内的其它test case也需要用到driver，那么需要将self.driver的赋值放到setUpClass()内部
         self.driver = driver
         # TODO: add test steps and asserts.
         # 如果没有报错也需要截图，可以调用self.save_img() 方法
